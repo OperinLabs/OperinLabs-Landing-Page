@@ -33,12 +33,11 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
             className="absolute inset-0 rounded-full border-[14px] blur-md"
             style={{ borderColor: "rgba(0,87,255,0.45)" }}
             animate={{
-              scale: [1, 1.45, 1.9],
-              opacity: [0.55, 0.5, 0],
+              scale: [1, 1.9],
+              opacity: [0.55, 0],
             }}
             transition={{
               duration: 3.6,
-              times: [0, 0.65, 1],
               repeat: Infinity,
               ease: "easeOut",
               delay: i * 1.8,
