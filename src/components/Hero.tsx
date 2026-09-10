@@ -7,9 +7,9 @@ interface HeroProps {
   onBookDemo: () => void;
 }
 
-const headline = ["Every", "call", "answered.", "In", "their", "language."];
+const headline = ["A", "Superhuman", "Team", "Of", "AI", "Workforce", "For", "Autonomous", "Healthcare", "Operations"];
 
-const tabs = ["Answering", "Booking", "Reminders"];
+const tabs = ["Answering", "Booking","Rescheduling", "Reminders", "Follow-Ups", "Refill"];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
