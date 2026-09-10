@@ -49,12 +49,6 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
 
           {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-6">
-            <a
-              href="#sign-in"
-              className="text-sm font-medium text-ink-soft transition-opacity duration-200 hover:opacity-70"
-            >
-              Sign In
-            </a>
             <motion.button
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
