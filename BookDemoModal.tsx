@@ -39,7 +39,7 @@ const initialState: FormState = {
 // OPTION C — Your own API:
 //   Point FORM_ENDPOINT at your backend route and keep the fetch() call.
 // ---------------------------------------------------------------------------
-const FORM_ENDPOINT = "https://formspree.io/f/mgaerdao";
+const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
 export default function BookDemoModal({ onClose }: BookDemoModalProps) {
   const [form, setForm] = useState<FormState>(initialState);
@@ -125,7 +125,7 @@ export default function BookDemoModal({ onClose }: BookDemoModalProps) {
             </p>
             <button
               onClick={onClose}
-              className="mt-6 rounded-xl bg-[#111111] px-6 py-3 text-white text-sm font-medium"
+              className="mt-6 rounded-xl bg-ink px-6 py-3 text-white text-sm font-medium transition-colors duration-200 hover:bg-accent"
             >
               Done
             </button>
@@ -237,7 +237,7 @@ export default function BookDemoModal({ onClose }: BookDemoModalProps) {
                 whileTap={{ scale: 0.96 }}
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full rounded-xl bg-[#111111] px-6 py-3.5 text-white text-sm font-medium disabled:opacity-60"
+                className="w-full rounded-xl bg-ink px-6 py-3.5 text-white text-sm font-medium transition-colors duration-200 hover:bg-accent disabled:opacity-60"
               >
                 {status === "submitting" ? "Submitting..." : "Request Demo"}
               </motion.button>
