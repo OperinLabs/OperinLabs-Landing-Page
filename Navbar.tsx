@@ -18,48 +18,44 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-line"
+        className="fixed top-4 sm:top-6 left-0 right-0 z-50 px-4"
       >
         <nav
-          className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4"
+          className="mx-auto flex max-w-3xl items-center justify-between gap-4 rounded-full border border-line bg-white/80 py-2 pl-4 pr-2 shadow-sm shadow-black/[0.03] backdrop-blur-md"
           aria-label="Primary"
         >
           {/* Logo */}
-          <a href="#top" className="flex items-center select-none">
-            <img
-              src="/logo.png"
-              alt="OperinLabs"
-              className="h-2 w-auto"
-              />
+          <a href="#top" className="flex shrink-0 items-center select-none">
+            <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replace(" ", "-")}`}
-                className="group relative text-sm font-medium text-ink-soft"
-              >
-                {link}
-                <span className="absolute left-0 -bottom-1 h-px w-0 bg-ink transition-all duration-300 group-hover:w-full" />
-              </a>
+          <div className="hidden md:flex md:items-center">
+            {navLinks.map((link, i) => (
+              <span key={link} className="flex items-center">
+                
+                  href={`#${link.toLowerCase().replace(" ", "-")}`}
+                  className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+                >
+                  {link}
+                </a>
+                {i < navLinks.length - 1 && (
+                  <span
+                    className="h-4 w-px bg-line"
+                    aria-hidden="true"
+                  />
+                )}
+              </span>
             ))}
           </div>
 
           {/* Desktop actions */}
-          <div className="hidden md:flex items-center gap-6">
-            <a
-              href="#sign-in"
-              className="text-sm font-medium text-ink-soft transition-opacity duration-200 hover:opacity-70"
-            >
-              Sign In
-            </a>
+          <div className="hidden md:flex md:items-center">
             <motion.button
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
               onClick={onBookDemo}
-              className="rounded-xl border border-ink/15 bg-white px-5 py-2.5 text-sm font-medium text-ink shadow-sm"
+              className="rounded-full bg-[#111111] px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-black"
             >
               Book a Demo
             </motion.button>
@@ -67,7 +63,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden text-ink text-2xl"
+            className="text-ink text-2xl md:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             onClick={() => setMenuOpen((v) => !v)}
           >
