@@ -13,6 +13,10 @@ export default {
         "accent-soft": "#E3EBFF",
         line: "rgba(10, 26, 94, 0.1)",
         "line-night": "rgba(245, 247, 252, 0.14)",
+        "mono-bg": "#FAFAF9",
+        "mono-ink": "#141414",
+        "mono-soft": "#6B6E76",
+        "mono-line": "rgba(20, 20, 20, 0.1)",
       },
       fontFamily: {
         editorial: ["'Fraunces'", "serif"],
