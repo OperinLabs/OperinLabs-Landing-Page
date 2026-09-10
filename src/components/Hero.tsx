@@ -9,7 +9,7 @@ interface HeroProps {
 
 const headline = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous", "healthcare", "operations"];
 
-const tabs = ["Answering", "Booking","Rescheduling", "Reminders", "Follow-Ups", "Refill"];
+const tabs = ["Answering", "Booking", "Rescheduling", "Reminders", "Follow-ups", "Refill"];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -44,7 +44,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-3xl flex-col items-center text-center"
+        className="mx-auto flex max-w-[90rem] flex-col items-start text-left"
       >
         <motion.h1
           variants={container}
@@ -83,7 +83,14 @@ export default function Hero({ onBookDemo }: HeroProps) {
             See pricing
           </a>
         </motion.div>
+      </motion.div>
 
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="mx-auto flex max-w-3xl flex-col items-center text-center"
+      >
         {/* Category tabs */}
         <motion.div
           variants={item}
