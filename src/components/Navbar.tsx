@@ -33,7 +33,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           <div className="hidden md:flex md:items-center">
             {navLinks.map((link, i) => (
               <span key={link} className="flex items-center">
-                
+                <a
                   href={`#${link.toLowerCase().replace(" ", "-")}`}
                   className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
                 >
