@@ -26,30 +26,10 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
       <p className="text-sm font-medium text-mono-soft">Talk to an Agent</p>
 
       <div className="relative mt-6 flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
-        {/* Expanding sonar pulse rings */}
-        {[0, 1].map((i) => (
-          <motion.span
-            key={i}
-            className="absolute inset-0 rounded-full border-[14px] blur-md"
-            style={{ borderColor: "rgba(0,87,255,0.45)" }}
-            animate={{
-              scale: [1, 1.9],
-              opacity: [0.55, 0],
-            }}
-            transition={{
-              duration: 3.6,
-              repeat: Infinity,
-              ease: "easeOut",
-              delay: i * 1.8,
-            }}
-            aria-hidden="true"
-          />
-        ))}
-
         {/* Ball */}
         <motion.div
           className="relative h-full w-full rounded-full"
-          animate={{ scale: [1, 1.035, 1] }}
+          animate={{ scale: [1, 1.045, 1] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
           style={{
             background:
