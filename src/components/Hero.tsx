@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import CallDemo from "./CallDemo";
+import { BsArrowRight } from "react-icons/bs";
+import VoiceOrb from "./VoiceOrb";
 import TrustIndicators from "./TrustIndicators";
 
 interface HeroProps {
@@ -8,12 +9,7 @@ interface HeroProps {
 
 const headline = ["Every", "call", "answered.", "In", "their", "language."];
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.09 },
-  },
-};
+const tabs = ["Answering", "Booking", "Reminders"];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -33,6 +29,11 @@ const word = {
   },
 };
 
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
+};
+
 export default function Hero({ onBookDemo }: HeroProps) {
   return (
     <section
@@ -43,69 +44,68 @@ export default function Hero({ onBookDemo }: HeroProps) {
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-12"
+        className="mx-auto flex max-w-3xl flex-col items-center text-center"
       >
-        {/* Left: copy */}
-        <div className="flex flex-col items-start text-left">
-          <motion.span
-            variants={item}
-            className="inline-flex items-center gap-2 rounded-full border border-mono-line bg-white px-4 py-1.5 text-xs font-medium text-mono-soft"
+        <motion.h1
+          variants={container}
+          className="font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
+        >
+          {headline.map((w, i) => (
+            <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
+              {w}
+            </motion.span>
+          ))}
+        </motion.h1>
+
+        <motion.p
+          variants={item}
+          className="mt-5 max-w-[46ch] text-lg leading-relaxed text-mono-soft"
+        >
+          OperinLabs picks up every clinic and hospital call in Assamese,
+          Bengali, and Hindi — booking appointments, sending reminders, and
+          recovering missed patients.
+        </motion.p>
+
+        <motion.div variants={item} className="mt-8 flex items-center gap-3">
+          <motion.button
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBookDemo}
+            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mono-ink opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-mono-ink" />
+            Book a Demo
+            <BsArrowRight className="text-xs" aria-hidden="true" />
+          </motion.button>
+          <a
+            href="#pricing"
+            className="rounded-full border border-mono-line px-6 py-3 text-sm font-medium text-mono-ink transition-colors hover:bg-white"
+          >
+            See pricing
+          </a>
+        </motion.div>
+
+        {/* Category tabs */}
+        <motion.div
+          variants={item}
+          className="mt-14 inline-flex items-center gap-1 rounded-full border border-mono-line bg-white p-1"
+        >
+          {tabs.map((tab, i) => (
+            <span
+              key={tab}
+              className={
+                i === 0
+                  ? "rounded-full bg-mono-ink px-4 py-1.5 text-xs font-medium text-white"
+                  : "rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
+              }
+            >
+              {tab}
             </span>
-            Answering calls right now, across Assam
-          </motion.span>
+          ))}
+        </motion.div>
 
-          <motion.h1
-            variants={container}
-            className="mt-8 max-w-xl font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
-          >
-            {headline.map((w, i) => (
-              <motion.span
-                key={i}
-                variants={word}
-                className="inline-block mr-[0.28em]"
-              >
-                {w}
-              </motion.span>
-            ))}
-          </motion.h1>
-
-          <motion.p
-            variants={item}
-            className="mt-6 max-w-[52ch] text-lg leading-relaxed text-mono-soft"
-          >
-            OperinLabs picks up every clinic and hospital call in Assamese,
-            Bengali, and Hindi — booking appointments, sending reminders, and
-            calling back the patients your front desk missed.
-          </motion.p>
-
-          <motion.div
-            variants={item}
-            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3"
-          >
-            <motion.button
-              whileHover={{ scale: 0.98 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onBookDemo}
-              className="inline-flex items-center justify-center rounded-xl bg-mono-ink px-8 py-4 text-white font-medium font-inter shadow-lg shadow-black/10 transition-colors duration-200 hover:bg-black"
-            >
-              Book a Demo
-            </motion.button>
-            <a
-              href="#product"
-              className="text-sm font-medium text-mono-soft underline decoration-mono-line decoration-1 underline-offset-4 transition-colors hover:text-mono-ink"
-            >
-              See how it works
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Right: live booking demo */}
-        <motion.div variants={item}>
-          <CallDemo />
+        {/* Voice orb centerpiece */}
+        <motion.div variants={item} className="mt-10">
+          <VoiceOrb onStart={onBookDemo} />
         </motion.div>
       </motion.div>
 
@@ -115,7 +115,9 @@ export default function Hero({ onBookDemo }: HeroProps) {
         animate="show"
         className="mx-auto mt-16 max-w-6xl border-t border-mono-line pt-8"
       >
-        <TrustIndicators />
+        <div className="flex justify-center">
+          <TrustIndicators />
+        </div>
       </motion.div>
     </section>
   );
