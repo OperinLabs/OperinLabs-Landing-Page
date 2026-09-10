@@ -62,9 +62,8 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           style={{
             background:
-              "radial-gradient(circle at 32% 28%, #6FA0FF 0%, #0057FF 45%, #0A1A5E 100%)",
-            boxShadow:
-              "0 30px 60px -20px rgba(10,26,94,0.45), inset 0 -10px 30px rgba(10,26,94,0.35)",
+              "linear-gradient(155deg, #0A1A5E 0%, #0057FF 55%, #9DC1FF 100%)",
+            boxShadow: "0 30px 60px -20px rgba(10,26,94,0.45)",
           }}
         />
       </div>
