@@ -65,7 +65,7 @@ const toneStyles: Record<string, { card: string; heading: string; price: string;
     button: "border-white/40 text-bg hover:bg-white/10",
   },
   "tint-1": {
-    card: "bg-[#8FCBAF]",
+    card: "bg-[#7FA8FF]",
     heading: "text-ink",
     price: "text-ink",
     divider: "border-ink/15",
@@ -73,7 +73,7 @@ const toneStyles: Record<string, { card: string; heading: string; price: string;
     button: "border-ink/25 text-ink hover:bg-white/30",
   },
   "tint-2": {
-    card: "bg-[#C7E6D7]",
+    card: "bg-[#C2D6FF]",
     heading: "text-ink",
     price: "text-ink",
     divider: "border-ink/12",
