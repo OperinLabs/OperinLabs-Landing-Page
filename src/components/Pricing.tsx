@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { BsCheck2 } from "react-icons/bs";
 
 interface PricingProps {
   onBookDemo: () => void;
@@ -7,50 +6,94 @@ interface PricingProps {
 
 const plans = [
   {
-    name: "Clinic",
-    price: "₹7,999",
-    unit: "/month, per line",
-    description: "For a single-doctor practice or small clinic front desk.",
+    name: "Essential",
+    price: "₹999–2,000",
+    unit: "/ month",
     features: [
-      "1 phone line, 24/7 coverage",
-      "Assamese, Bengali, Hindi, English",
-      "Appointment booking & reminders",
-      "Missed-call callback",
+      "Call answering, 24×7",
+      "Appointment booking",
+      "Appointment confirmation",
+      "Assamese, Bengali & Hindi",
     ],
-    highlighted: false,
+    tone: "solid",
   },
   {
-    name: "Hospital",
-    price: "₹24,999",
-    unit: "/month, up to 5 lines",
-    description: "For multi-department hospitals with higher call volume.",
+    name: "Growth",
+    price: "₹3,000–4,000+",
+    unit: "/ month",
     features: [
-      "Everything in Clinic",
-      "Department-based call routing",
-      "Priority queue for urgent callers",
-      "Weekly call & booking reports",
+      "Everything in Essential",
+      "Appointment reminders",
+      "Automated follow-ups",
+      "No-show recovery",
     ],
-    highlighted: true,
+    tone: "tint-1",
   },
   {
-    name: "Network",
-    price: "Custom",
-    unit: "pricing",
-    description: "For hospital groups running several locations on one system.",
+    name: "Retention",
+    price: "₹6,000–8,000+",
+    unit: "/ month",
     features: [
-      "Everything in Hospital",
-      "Unlimited lines across locations",
-      "Dedicated onboarding & support",
-      "Custom reporting & integrations",
+      "Everything in Growth",
+      "Medication refill automation",
+      "Vitals & check-in tracking",
+      "Continuous engagement",
     ],
-    highlighted: false,
+    tone: "tint-2",
+  },
+  {
+    name: "Enterprise",
+    price: "Custom ₹15K–50K+",
+    unit: "/ month",
+    features: [
+      "Everything in Retention",
+      "Multi-branch hospital chains",
+      "Custom rollout & integrations",
+      "Dedicated support & API",
+    ],
+    tone: "tint-3",
   },
 ];
 
+const toneStyles: Record<string, { card: string; heading: string; price: string; divider: string; body: string; button: string }> = {
+  solid: {
+    card: "bg-accent",
+    heading: "text-bg",
+    price: "text-bg",
+    divider: "border-white/25",
+    body: "text-bg/85",
+    button: "border-white/40 text-bg hover:bg-white/10",
+  },
+  "tint-1": {
+    card: "bg-[#8FCBAF]",
+    heading: "text-ink",
+    price: "text-ink",
+    divider: "border-ink/15",
+    body: "text-ink/75",
+    button: "border-ink/25 text-ink hover:bg-white/30",
+  },
+  "tint-2": {
+    card: "bg-[#C7E6D7]",
+    heading: "text-ink",
+    price: "text-ink",
+    divider: "border-ink/12",
+    body: "text-ink/70",
+    button: "border-ink/20 text-ink hover:bg-white/40",
+  },
+  "tint-3": {
+    card: "bg-accent-soft",
+    heading: "text-ink",
+    price: "text-ink",
+    divider: "border-ink/10",
+    body: "text-ink/70",
+    button: "border-ink/20 text-ink hover:bg-white/50",
+  },
+};
+
 export default function Pricing({ onBookDemo }: PricingProps) {
   return (
-    <section id="pricing" className="scroll-mt-24 bg-night px-6 py-24">
-      <div className="mx-auto max-w-5xl">
+    <section id="pricing" className="scroll-mt-24 bg-bg px-6 py-24">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,69 +101,57 @@ export default function Pricing({ onBookDemo }: PricingProps) {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-xl"
         >
-          <h2 className="font-editorial font-medium text-bg text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
+          <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
             Priced per line, not per excuse.
           </h2>
-          <p className="mt-4 max-w-[50ch] text-base leading-relaxed text-night-soft">
-            Every plan includes full multilingual coverage. Larger plans add
-            routing and reporting as your call volume grows.
+          <p className="mt-4 max-w-[50ch] text-base leading-relaxed text-ink-soft">
+            Every plan includes multilingual call answering. Higher tiers add
+            retention and rollout support as your clinic grows.
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
-              className={
-                plan.highlighted
-                  ? "flex flex-col rounded-3xl border border-accent/40 bg-white/[0.06] p-8 lg:-my-3 lg:py-11 lg:shadow-2xl lg:shadow-black/20"
-                  : "flex flex-col rounded-3xl border border-line-night p-8"
-              }
-            >
-              {plan.highlighted && (
-                <span className="mb-4 inline-flex w-fit items-center rounded-full bg-accent/15 px-3 py-1 text-xs font-medium text-accent">
-                  Most hospitals choose this
-                </span>
-              )}
-              <h3 className="font-editorial text-2xl text-bg">{plan.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-night-soft">
-                {plan.description}
-              </p>
-              <div className="mt-6 flex items-baseline gap-1.5">
-                <span className="font-editorial text-3xl text-bg">
-                  {plan.price}
-                </span>
-                <span className="text-sm text-night-soft">{plan.unit}</span>
-              </div>
-
-              <ul className="mt-6 flex flex-1 flex-col gap-3">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-night-soft">
-                    <BsCheck2 className="mt-0.5 shrink-0 text-accent" aria-hidden="true" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                onClick={onBookDemo}
-                className={
-                  plan.highlighted
-                    ? "mt-8 w-full rounded-xl bg-accent px-5 py-3 text-sm font-medium text-night transition-colors hover:bg-accent/90"
-                    : "mt-8 w-full rounded-xl border border-line-night px-5 py-3 text-sm font-medium text-bg transition-colors hover:bg-white/5"
-                }
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {plans.map((plan, i) => {
+            const tone = toneStyles[plan.tone];
+            return (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
+                className={`flex flex-col rounded-3xl p-8 ${tone.card}`}
               >
-                {plan.price === "Custom" ? "Talk to us" : "Book a Demo"}
-              </button>
-            </motion.div>
-          ))}
+                <h3 className={`font-editorial text-2xl ${tone.heading}`}>
+                  {plan.name}
+                </h3>
+                <p className={`mt-2 text-base font-medium ${tone.price}`}>
+                  {plan.price} <span className="font-normal">{plan.unit}</span>
+                </p>
+
+                <div className={`mt-6 border-t ${tone.divider}`} />
+
+                <ul className={`mt-6 flex flex-1 flex-col gap-3 text-sm leading-relaxed ${tone.body}`}>
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex gap-2.5">
+                      <span aria-hidden="true">·</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  onClick={onBookDemo}
+                  className={`mt-8 w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${tone.button}`}
+                >
+                  Book a demo
+                </button>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <p className="mt-8 text-center text-xs text-night-soft">
+        <p className="mt-8 text-center text-xs text-ink-soft">
           Sample pricing shown for planning purposes — confirm final numbers before publishing.
         </p>
       </div>
