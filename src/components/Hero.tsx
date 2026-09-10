@@ -48,7 +48,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
       >
         <motion.h1
           variants={container}
-          className="font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
+          className="max-w-[45rem] font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
         >
           {headline.map((w, i) => (
             <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
