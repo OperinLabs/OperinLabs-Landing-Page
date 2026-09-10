@@ -1,156 +1,176 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-interface Line {
-  speaker: "Caller" | "OperinLabs";
-  text: string;
-}
+import { BsCheck2 } from "react-icons/bs";
 
 interface Exchange {
-  caller: string;
-  lines: Line[];
+  patientLabel: string;
+  patientMsg: string;
+  reply: string;
+  bookingLine: string;
 }
 
 const EXCHANGES: Exchange[] = [
   {
-    caller: "Silchar Medical Centre",
-    lines: [
-      { speaker: "Caller", text: "Aunty, doctor kolir slot ekhon ase ne?" },
-      {
-        speaker: "OperinLabs",
-        text: "Ji ase, kalir bikelir 4 baji slot ta khali ase. Book kori dim ne?",
-      },
-    ],
+    patientLabel: "Patient · Silchar",
+    patientMsg: "Aunty, doctor kolir slot ekhon ase ne?",
+    reply:
+      "Ji ase! Kalir bikelir 4 baji slot ta khali ase. Aponar naam ta di dibo pare ne?",
+    bookingLine: "Tomorrow, 4:00 PM — Dr. Sharma",
   },
   {
-    caller: "Green Valley Clinic",
-    lines: [
-      { speaker: "Caller", text: "Doctor-er shathe ki ajke dekha korte parbo?" },
-      {
-        speaker: "OperinLabs",
-        text: "Ha, bikel 5 tay ekta slot ache. Naam ar phone number ta bolben?",
-      },
-    ],
+    patientLabel: "Patient · Guwahati",
+    patientMsg: "Doctor-er shathe ki ajke dekha korte parbo?",
+    reply: "Ha, bikel 5 tay ekta slot ache. Naam ar phone number ta bolben?",
+    bookingLine: "Today, 5:00 PM — Dr. Bora",
   },
   {
-    caller: "Apollo Care, Guwahati",
-    lines: [
-      { speaker: "Caller", text: "Kal ka appointment hai, time confirm karna tha." },
-      {
-        speaker: "OperinLabs",
-        text: "Zaroor, aapka appointment kal subah 10 baje hai. Reminder bhi bhej dungi.",
-      },
-    ],
+    patientLabel: "Patient · Apollo Care",
+    patientMsg: "Kal ka appointment hai, time confirm karna tha.",
+    reply:
+      "Zaroor, aapka appointment kal subah 10 baje hai. Reminder bhi bhej dungi.",
+    bookingLine: "Tomorrow, 10:00 AM — confirmed",
   },
 ];
 
+type Phase = "typing" | "card" | "tap" | "confirmed";
+
 export default function CallDemo() {
   const [exchangeIndex, setExchangeIndex] = useState(0);
-  const [visibleLines, setVisibleLines] = useState(0);
+  const [phase, setPhase] = useState<Phase>("typing");
+  const [revealed, setRevealed] = useState(0);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const exchange = EXCHANGES[exchangeIndex];
 
+  const clearTimers = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  };
+
+  // Reset when we move to a new exchange
   useEffect(() => {
-    setVisibleLines(0);
+    setRevealed(0);
+    setPhase("typing");
+    return clearTimers;
   }, [exchangeIndex]);
 
+  // Typing reveal
   useEffect(() => {
-    if (visibleLines >= exchange.lines.length) {
-      const holdTimer = setTimeout(() => {
-        setExchangeIndex((i) => (i + 1) % EXCHANGES.length);
-      }, 2400);
-      return () => clearTimeout(holdTimer);
+    if (phase !== "typing") return;
+    if (revealed >= exchange.reply.length) {
+      const t = setTimeout(() => setPhase("card"), 500);
+      timers.current.push(t);
+      return;
     }
-    const lineTimer = setTimeout(() => {
-      setVisibleLines((v) => v + 1);
-    }, 1300);
-    return () => clearTimeout(lineTimer);
-  }, [visibleLines, exchange.lines.length]);
+    const t = setTimeout(() => setRevealed((r) => r + 2), 22);
+    timers.current.push(t);
+    return () => clearTimeout(t);
+  }, [phase, revealed, exchange.reply.length]);
+
+  // Card -> tap -> confirmed -> next
+  useEffect(() => {
+    if (phase === "card") {
+      const t = setTimeout(() => setPhase("tap"), 1500);
+      timers.current.push(t);
+      return () => clearTimeout(t);
+    }
+    if (phase === "tap") {
+      const t = setTimeout(() => setPhase("confirmed"), 260);
+      timers.current.push(t);
+      return () => clearTimeout(t);
+    }
+    if (phase === "confirmed") {
+      const t = setTimeout(() => {
+        setExchangeIndex((i) => (i + 1) % EXCHANGES.length);
+      }, 2000);
+      timers.current.push(t);
+      return () => clearTimeout(t);
+    }
+  }, [phase]);
+
+  const replyText = exchange.reply.slice(0, revealed);
+  const isReplyDone = revealed >= exchange.reply.length;
 
   return (
     <div className="relative w-full max-w-[440px] mx-auto lg:mx-0">
-      {/* Ambient glow behind the card */}
-      <div
-        className="pointer-events-none absolute -inset-10 rounded-[40px] bg-accent/20 blur-3xl"
-        aria-hidden="true"
-      />
-
-      <div className="relative rounded-[28px] border border-line-night bg-night p-6 shadow-2xl shadow-black/30">
-        {/* Call header */}
-        <div className="flex items-center justify-between">
+      <div className="relative rounded-[28px] border border-mono-line bg-white p-6 shadow-xl shadow-black/5">
+        {/* Incoming patient message */}
+        <div className="flex items-start gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft">
+            {exchange.patientLabel.charAt(0)}
+          </div>
           <div>
-            <p className="text-[11px] font-medium tracking-wide text-night-soft">
-              Incoming call
-            </p>
             <AnimatePresence mode="wait">
               <motion.p
-                key={exchange.caller}
+                key={exchange.patientLabel}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.3 }}
-                className="font-editorial text-lg text-bg"
+                className="text-xs font-medium text-mono-soft"
               >
-                {exchange.caller}
+                {exchange.patientLabel}
               </motion.p>
             </AnimatePresence>
+            <p className="mt-1 text-sm leading-relaxed text-mono-ink">
+              {exchange.patientMsg}
+            </p>
           </div>
-          <span className="flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1.5 text-xs font-medium text-accent">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-            </span>
-            Live
-          </span>
         </div>
 
-        {/* Waveform */}
-        <div className="mt-5 flex h-14 items-center justify-center gap-[3px] rounded-2xl bg-white/5 px-4">
-          {Array.from({ length: 32 }).map((_, i) => (
-            <motion.span
-              key={i}
-              className="w-[3px] rounded-full bg-accent/70"
-              animate={{
-                height: [
-                  6 + ((i * 7) % 20),
-                  10 + ((i * 13) % 28),
-                  6 + ((i * 5) % 16),
-                ],
-              }}
-              transition={{
-                duration: 0.9 + (i % 5) * 0.15,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-                delay: i * 0.03,
-              }}
-            />
-          ))}
-        </div>
+        <div className="my-5 h-px bg-mono-line" />
 
-        {/* Live transcript */}
-        <div className="mt-5 min-h-[132px] space-y-3">
-          <AnimatePresence mode="popLayout">
-            {exchange.lines.slice(0, visibleLines).map((line, i) => (
-              <motion.div
-                key={`${exchangeIndex}-${i}`}
-                initial={{ opacity: 0, y: 8 }}
+        {/* OperinLabs reply */}
+        <div className="relative flex items-start gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg">
+            O
+          </div>
+          <div className="min-h-[72px] flex-1">
+            <p className="text-xs font-medium text-mono-soft">OperinLabs</p>
+            <p className="mt-1 text-sm leading-relaxed text-mono-ink">
+              {replyText}
+              {!isReplyDone && (
+                <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-mono-ink" />
+              )}
+            </p>
+
+            {phase === "confirmed" && (
+              <motion.span
+                initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className={
-                  line.speaker === "OperinLabs"
-                    ? "ml-6 rounded-2xl rounded-bl-sm bg-accent/15 px-4 py-2.5"
-                    : "mr-6 rounded-2xl rounded-br-sm bg-white/8 px-4 py-2.5"
-                }
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-mono-bg px-3 py-1 text-xs font-medium text-mono-ink"
               >
-                <p className="text-[10px] font-medium uppercase tracking-wider text-night-soft">
-                  {line.speaker === "OperinLabs" ? "OperinLabs" : "Caller"}
+                <BsCheck2 className="text-[13px]" aria-hidden="true" />
+                Appointment booked
+              </motion.span>
+            )}
+          </div>
+
+          {/* Floating dark confirm card */}
+          <AnimatePresence>
+            {(phase === "card" || phase === "tap") && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="absolute -bottom-4 right-0 w-[240px] rounded-2xl bg-mono-ink p-4 shadow-2xl shadow-black/30"
+              >
+                <p className="text-[10px] font-medium uppercase tracking-wider text-mono-bg/50">
+                  Booking preview
                 </p>
-                <p className="mt-0.5 text-sm leading-snug text-bg">
-                  {line.text}
+                <p className="mt-1.5 text-sm font-medium text-mono-bg">
+                  {exchange.bookingLine}
                 </p>
+                <motion.button
+                  animate={phase === "tap" ? { scale: 0.94 } : { scale: 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="mt-3 w-full rounded-lg bg-mono-bg py-2 text-xs font-medium text-mono-ink"
+                >
+                  Confirm
+                </motion.button>
               </motion.div>
-            ))}
+            )}
           </AnimatePresence>
         </div>
       </div>
