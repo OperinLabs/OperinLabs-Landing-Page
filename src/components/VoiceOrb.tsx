@@ -25,19 +25,41 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
     <div className="flex flex-col items-center">
       <p className="text-sm font-medium text-mono-soft">Talk to an Agent</p>
 
-      <div className="relative mt-6">
-        <div
-          className="pointer-events-none absolute -inset-10 rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(0,87,255,0.25) 0%, rgba(0,87,255,0) 70%)",
-          }}
-          aria-hidden="true"
-        />
+      <div className="relative mt-6 flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
+        {/* Expanding sonar pulse rings */}
+        {[0, 1].map((i) => (
+          <motion.span
+            key={i}
+            className="absolute inset-0 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(0,87,255,0.22) 0%, rgba(0,87,255,0) 70%)",
+            }}
+            animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
+            transition={{
+              duration: 3.2,
+              repeat: Infinity,
+              ease: "easeOut",
+              delay: i * 1.6,
+            }}
+            aria-hidden="true"
+          />
+        ))}
+
+        {/* Organic morphing blob */}
         <motion.div
-          animate={{ scale: [1, 1.035, 1] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="relative h-56 w-56 rounded-full sm:h-64 sm:w-64"
+          className="relative h-full w-full"
+          animate={{
+            borderRadius: [
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+              "30% 60% 70% 40% / 50% 60% 30% 60%",
+              "50% 60% 30% 70% / 40% 50% 60% 50%",
+              "60% 40% 30% 70% / 60% 30% 70% 40%",
+            ],
+            rotate: [0, 8, -6, 0],
+            scale: [1, 1.04, 0.98, 1],
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           style={{
             background:
               "radial-gradient(circle at 32% 28%, #6FA0FF 0%, #0057FF 45%, #0A1A5E 100%)",
