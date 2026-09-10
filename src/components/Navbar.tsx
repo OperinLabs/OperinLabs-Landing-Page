@@ -44,7 +44,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
               onClick={onBookDemo}
-              className="ml-1 rounded-full bg-[#111111] px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-black"
+              className="ml-1 rounded-full bg-ink px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-accent"
             >
               Book a Demo
             </motion.button>
