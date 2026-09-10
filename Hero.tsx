@@ -1,82 +1,124 @@
 import { motion } from "framer-motion";
-import CTAButton from "./CTAButton";
-import HeroVideo from "./HeroVideo";
+import { BsArrowRight } from "react-icons/bs";
+import VoiceOrb from "./VoiceOrb";
 import TrustIndicators from "./TrustIndicators";
 
 interface HeroProps {
   onBookDemo: () => void;
 }
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
+const headline = ["Every", "call", "answered.", "In", "their", "language."];
+
+const tabs = ["Answering", "Booking", "Reminders"];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: "easeOut" as const },
   },
+};
+
+const word = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
+};
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
 };
 
 export default function Hero({ onBookDemo }: HeroProps) {
   return (
-    <main id="top" className="pt-36 sm:pt-40 px-6 pb-20">
+    <section
+      id="top"
+      className="scroll-mt-24 bg-mono-bg px-6 pb-20 pt-36 sm:pt-40"
+    >
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-w-3xl mx-auto flex flex-col items-center text-center"
+        className="mx-auto flex max-w-3xl flex-col items-center text-center"
       >
-        {/* Hero badge */}
-        <motion.span
-          variants={item}
-          className="inline-flex items-center rounded-full border border-line bg-gray-200/50 backdrop-blur-sm px-4 py-1.5 text-xs font-medium text-ink-soft"
-        >
-          AI voice agents for India's clinics and hospitals
-        </motion.span>
-
-        {/* Hero heading */}
         <motion.h1
-          variants={item}
-          className="mt-8 font-editorial font-medium text-ink leading-[1.05] tracking-[-0.04em] text-[44px] sm:text-[56px] md:text-[72px] lg:text-[96px]"
+          variants={container}
+          className="font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
         >
-          Every call answered.
-          <br />
-          Meet OperinLabs.
+          {headline.map((w, i) => (
+            <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
+              {w}
+            </motion.span>
+          ))}
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           variants={item}
-          className="mt-8 max-w-[700px] text-lg md:text-xl text-ink-soft leading-relaxed"
+          className="mt-5 max-w-[46ch] text-lg leading-relaxed text-mono-soft"
         >
-          OperinLabs answers every clinic and hospital call — in Assamese,
+          OperinLabs picks up every clinic and hospital call in Assamese,
           Bengali, and Hindi — booking appointments, sending reminders, and
-          recovering patients your front desk was missing.
+          recovering missed patients.
         </motion.p>
 
-        {/* Primary CTA */}
-        <motion.div variants={item} className="mt-8">
-          <CTAButton onClick={onBookDemo} ariaLabel="Book a demo of Aura">
+        <motion.div variants={item} className="mt-8 flex items-center gap-3">
+          <motion.button
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBookDemo}
+            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
+          >
             Book a Demo
-          </CTAButton>
+            <BsArrowRight className="text-xs" aria-hidden="true" />
+          </motion.button>
+          <a
+            href="#pricing"
+            className="rounded-full border border-mono-line px-6 py-3 text-sm font-medium text-mono-ink transition-colors hover:bg-white"
+          >
+            See pricing
+          </a>
         </motion.div>
 
-        {/* Hero video */}
-        <motion.div variants={item} className="w-full">
-          <HeroVideo />
+        {/* Category tabs */}
+        <motion.div
+          variants={item}
+          className="mt-14 inline-flex items-center gap-1 rounded-full border border-mono-line bg-white p-1"
+        >
+          {tabs.map((tab, i) => (
+            <span
+              key={tab}
+              className={
+                i === 0
+                  ? "rounded-full bg-mono-ink px-4 py-1.5 text-xs font-medium text-white"
+                  : "rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
+              }
+            >
+              {tab}
+            </span>
+          ))}
         </motion.div>
 
-        {/* Trust indicators */}
+        {/* Voice orb centerpiece */}
         <motion.div variants={item} className="mt-10">
-          <TrustIndicators />
+          <VoiceOrb onStart={onBookDemo} />
         </motion.div>
       </motion.div>
-    </main>
+
+      <motion.div
+        variants={item}
+        initial="hidden"
+        animate="show"
+        className="mx-auto mt-16 max-w-6xl border-t border-mono-line pt-8"
+      >
+        <div className="flex justify-center">
+          <TrustIndicators />
+        </div>
+      </motion.div>
+    </section>
   );
 }
