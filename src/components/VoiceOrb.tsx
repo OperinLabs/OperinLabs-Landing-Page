@@ -27,18 +27,21 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
 
       <div className="relative mt-6 flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
         {/* Expanding sonar pulse rings */}
-        {[0, 1, 2].map((i) => (
+        {[0, 1].map((i) => (
           <motion.span
             key={i}
-            className="absolute inset-0 rounded-full border-2"
-            style={{ borderColor: "#0057FF" }}
-            initial={{ scale: 1, opacity: 0.7 }}
-            animate={{ scale: [1, 1.9], opacity: [0.7, 0] }}
+            className="absolute inset-0 rounded-full border-[14px] blur-md"
+            style={{ borderColor: "rgba(0,87,255,0.45)" }}
+            animate={{
+              scale: [1, 1.45, 1.9],
+              opacity: [0.55, 0.5, 0],
+            }}
             transition={{
-              duration: 3,
+              duration: 3.6,
+              times: [0, 0.65, 1],
               repeat: Infinity,
               ease: "easeOut",
-              delay: i * 1,
+              delay: i * 1.8,
             }}
             aria-hidden="true"
           />
