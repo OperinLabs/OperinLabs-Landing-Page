@@ -32,7 +32,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           {/* Desktop links + actions,grouped together on the right */}
           <div className="hidden md:flex md:items-center md:gap-2">
             {navLinks.map((link) => (
-              
+                <
                   key={link}
                   href={`#${link.toLowerCase().replace(" ", "-")}`}
                   className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
