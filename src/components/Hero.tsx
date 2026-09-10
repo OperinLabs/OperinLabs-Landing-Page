@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import CTAButton from "./CTAButton";
-import HeroVideo from "./HeroVideo";
+import CallDemo from "./CallDemo";
 import TrustIndicators from "./TrustIndicators";
 
 interface HeroProps {
@@ -25,58 +25,77 @@ const item = {
 
 export default function Hero({ onBookDemo }: HeroProps) {
   return (
-    <main id="top" className="pt-36 sm:pt-40 px-6 pb-20">
+    <section
+      id="top"
+      className="scroll-mt-24 bg-night px-6 pb-20 pt-36 sm:pt-40"
+    >
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-w-3xl mx-auto flex flex-col items-center text-center"
+        className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-12"
       >
-        {/* Hero badge */}
-        <motion.span
-          variants={item}
-          className="inline-flex items-center rounded-full border border-line bg-gray-200/50 backdrop-blur-sm px-4 py-1.5 text-xs font-medium text-ink-soft"
-        >
-          AI voice agents for India's clinics and hospitals
-        </motion.span>
+        {/* Left: copy */}
+        <div className="flex flex-col items-start text-left">
+          <motion.span
+            variants={item}
+            className="inline-flex items-center gap-2 rounded-full border border-line-night bg-white/5 px-4 py-1.5 text-xs font-medium text-night-soft"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+            </span>
+            Answering calls right now, across Assam
+          </motion.span>
 
-        {/* Hero heading */}
-        <motion.h1
-          variants={item}
-          className="mt-8 font-editorial font-medium text-ink leading-[1.05] tracking-[-0.04em] text-[44px] sm:text-[56px] md:text-[72px] lg:text-[96px]"
-        >
-          Every call answered.
-          <br />
-          Meet OperinLabs.
-        </motion.h1>
+          <motion.h1
+            variants={item}
+            className="mt-8 max-w-xl font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-bg text-[40px] sm:text-[52px] md:text-[64px]"
+          >
+            Every call answered.
+            <br />
+            In their language.
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          variants={item}
-          className="mt-8 max-w-[700px] text-lg md:text-xl text-ink-soft leading-relaxed"
-        >
-          OperinLabs answers every clinic and hospital call — in Assamese,
-          Bengali, and Hindi — booking appointments, sending reminders, and
-          recovering patients your front desk was missing.
-        </motion.p>
+          <motion.p
+            variants={item}
+            className="mt-6 max-w-[52ch] text-lg leading-relaxed text-night-soft"
+          >
+            OperinLabs picks up every clinic and hospital call in Assamese,
+            Bengali, and Hindi — booking appointments, sending reminders, and
+            calling back the patients your front desk missed.
+          </motion.p>
 
-        {/* Primary CTA */}
-        <motion.div variants={item} className="mt-8">
-          <CTAButton onClick={onBookDemo} ariaLabel="Book a demo of Aura">
-            Book a Demo
-          </CTAButton>
-        </motion.div>
+          <motion.div
+            variants={item}
+            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3"
+          >
+            <CTAButton onClick={onBookDemo} ariaLabel="Book a demo of OperinLabs">
+              Book a Demo
+            </CTAButton>
+            <a
+              href="#product"
+              className="text-sm font-medium text-night-soft underline decoration-line-night decoration-1 underline-offset-4 transition-colors hover:text-bg"
+            >
+              See how it works
+            </a>
+          </motion.div>
+        </div>
 
-        {/* Hero video */}
-        <motion.div variants={item} className="w-full">
-          <HeroVideo />
-        </motion.div>
-
-        {/* Trust indicators */}
-        <motion.div variants={item} className="mt-10">
-          <TrustIndicators />
+        {/* Right: live call mockup */}
+        <motion.div variants={item}>
+          <CallDemo />
         </motion.div>
       </motion.div>
-    </main>
+
+      <motion.div
+        variants={item}
+        initial="hidden"
+        animate="show"
+        className="mx-auto mt-16 max-w-6xl border-t border-line-night pt-8"
+      >
+        <TrustIndicators />
+      </motion.div>
+    </section>
   );
 }
