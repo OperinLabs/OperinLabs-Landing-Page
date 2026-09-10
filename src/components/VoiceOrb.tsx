@@ -29,8 +29,8 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
         {/* Ball */}
         <motion.div
           className="relative h-full w-full rounded-full"
-          animate={{ scale: [1, 1.045, 1] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ scale: [1, 1.055, 1] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
           style={{
             background:
               "linear-gradient(155deg, #0A1A5E 0%, #0057FF 55%, #9DC1FF 100%)",
