@@ -13,9 +13,9 @@ export default function TrustIndicators() {
       {items.map(({ icon: Icon, label }) => (
         <div
           key={label}
-          className="flex items-center gap-2 text-sm font-medium text-night-soft"
+          className="flex items-center gap-2 text-sm font-medium text-mono-soft"
         >
-          <Icon aria-hidden="true" className="text-base text-accent" />
+          <Icon aria-hidden="true" className="text-base text-mono-ink" />
           <span>{label}</span>
         </div>
       ))}
