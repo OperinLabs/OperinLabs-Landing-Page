@@ -4,14 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#F5F5F7",
-        ink: "#0A0A0A",
-        "ink-soft": "#5B5B65",
-        accent: "#4F46E5",
-        line: "rgba(0, 0, 0, 0.08)",
+        bg: "#F1F3EF",
+        ink: "#101A22",
+        "ink-soft": "#5A6560",
+        night: "#101A22",
+        "night-soft": "#8FA096",
+        accent: "#1F9D6B",
+        "accent-soft": "#E4F1EA",
+        amber: "#C7852E",
+        line: "rgba(16, 26, 34, 0.1)",
+        "line-night": "rgba(241, 243, 239, 0.14)",
       },
       fontFamily: {
-        editorial: ["'Cormorant Garamond'", "serif"],
+        editorial: ["'Fraunces'", "serif"],
         inter: ["'Inter'", "sans-serif"],
       },
     },
