@@ -4,16 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#F1F3EF",
-        ink: "#101A22",
-        "ink-soft": "#5A6560",
-        night: "#101A22",
-        "night-soft": "#8FA096",
-        accent: "#1F9D6B",
-        "accent-soft": "#E4F1EA",
-        amber: "#C7852E",
-        line: "rgba(16, 26, 34, 0.1)",
-        "line-night": "rgba(241, 243, 239, 0.14)",
+        bg: "#F5F7FC",
+        ink: "#0A1A5E",
+        "ink-soft": "#57628A",
+        night: "#0A1A5E",
+        "night-soft": "#93A3D6",
+        accent: "#0057FF",
+        "accent-soft": "#E3EBFF",
+        line: "rgba(10, 26, 94, 0.1)",
+        "line-night": "rgba(245, 247, 252, 0.14)",
       },
       fontFamily: {
         editorial: ["'Fraunces'", "serif"],
