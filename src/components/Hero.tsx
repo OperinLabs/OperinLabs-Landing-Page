@@ -7,7 +7,7 @@ interface HeroProps {
   onBookDemo: () => void;
 }
 
-const headline = ["A", "Superhuman", "Team", "Of", "AI", "Workforce", "For", "Autonomous", "Healthcare", "Operations"];
+const headline = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous", "healthcare", "operations"];
 
 const tabs = ["Answering", "Booking","Rescheduling", "Reminders", "Follow-Ups", "Refill"];
 
