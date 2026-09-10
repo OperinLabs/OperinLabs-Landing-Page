@@ -25,23 +25,12 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           aria-label="Primary"
         >
           {/* Logo */}
-          <a href="#top" className="flex items-center gap-2 select-none">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M10 0L11.8 8.2L20 10L11.8 11.8L10 20L8.2 11.8L0 10L8.2 8.2L10 0Z"
-                fill="#4F46E5"
-              />
-            </svg>
-            <span className="text-xl font-medium font-inter text-ink">
-              OperinLabs
-            </span>
+          <a href="#top" className="flex items-center select-none">
+            <img
+              src="/logo.png"
+              alt="OperinLabs"
+              className="h-8 w-auto"
+            />
           </a>
 
           {/* Desktop links */}
