@@ -1,33 +1,41 @@
 import { motion } from "framer-motion";
-import { BsGlobe2, BsCalendarCheck, BsBellFill, BsTelephoneInbound } from "react-icons/bs";
+import { BsTelephone, BsCalendarEvent, BsBell, BsArrowRepeat, BsArrowRight } from "react-icons/bs";
 
-const features = [
+const steps = [
   {
-    icon: BsGlobe2,
-    heading: "Speaks your patients' language",
-    body: "Every call is answered in Assamese, Bengali, Hindi, or English — whichever the caller starts in. No switching, no waiting for a translator.",
+    number: "01",
+    icon: BsTelephone,
+    title: "Connect",
+    tags: "Calls · WhatsApp · Missed calls",
+    body: "OperinLabs answers instantly, in Assamese, Bengali, or Hindi, and understands what the patient needs.",
   },
   {
-    icon: BsCalendarCheck,
-    heading: "Books straight into your schedule",
-    body: "OperinLabs checks real availability and confirms a slot on the call itself, so appointments land on your calendar without a front-desk handoff.",
+    number: "02",
+    icon: BsCalendarEvent,
+    title: "Convert",
+    tags: "Booking · Rescheduling · Follow-ups",
+    body: "Turns the conversation into a confirmed appointment, or a recovered patient who would have hung up.",
   },
   {
-    icon: BsBellFill,
-    heading: "Sends reminders that cut no-shows",
-    body: "Patients get a call or message ahead of their visit, in the language they booked in — fewer empty slots, less time re-filling them.",
+    number: "03",
+    icon: BsBell,
+    title: "Retain",
+    tags: "Reminders · Refills · Vitals check-ins",
+    body: "Keeps patients engaged between visits and supports continuous care, especially for elderly patients.",
   },
   {
-    icon: BsTelephoneInbound,
-    heading: "Calls back every missed patient",
-    body: "After hours or during a rush, OperinLabs logs the missed call and calls the patient back — so a busy morning never costs you a booking.",
+    number: "04",
+    icon: BsArrowRepeat,
+    title: "Repeat",
+    tags: "Continuous engagement loop",
+    body: "An always-on system that gives clinics and hospitals steadier patient engagement, call after call.",
   },
 ];
 
 export default function Product() {
   return (
     <section id="product" className="scroll-mt-24 bg-bg px-6 py-24">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,42 +43,47 @@ export default function Product() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-xl"
         >
-          <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
+          <p className="text-sm font-medium text-accent">How OperinLabs works</p>
+          <h2 className="mt-3 font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
             One line. Every patient handled.
           </h2>
           <p className="mt-4 max-w-[50ch] text-base leading-relaxed text-ink-soft">
-            OperinLabs sits on your clinic's phone line and does the work a
-            second front-desk hire would — without the training, the shifts,
-            or the days off.
+            OperinLabs sits on your clinic's phone line and runs the same
+            loop on every call, so nothing depends on who happens to pick up.
           </p>
         </motion.div>
 
-        <div className="mt-16 flex flex-col gap-14 sm:gap-16">
-          {features.map(({ icon: Icon, heading, body }, i) => (
-            <motion.div
-              key={heading}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className={`flex flex-col gap-6 border-t border-line pt-10 sm:flex-row sm:items-start ${
-                i % 2 === 1 ? "sm:flex-row-reverse sm:text-right" : ""
-              }`}
-            >
-              <div
-                className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent ${
-                  i % 2 === 1 ? "sm:ml-6" : "sm:mr-6"
-                }`}
+        <div className="mt-14 grid gap-6 lg:grid-cols-4 lg:gap-0">
+          {steps.map(({ number, icon: Icon, title, tags, body }, i) => (
+            <div key={number} className="flex items-stretch">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                className="flex flex-1 flex-col rounded-2xl border border-line bg-white p-7"
               >
-                <Icon className="text-lg" aria-hidden="true" />
-              </div>
-              <div className="max-w-[46ch]">
-                <h3 className="font-editorial text-2xl text-ink">{heading}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
+                <span className="font-editorial text-4xl text-accent/30">
+                  {number}
+                </span>
+                <div className="mt-4 flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
+                  <Icon className="text-base" aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 font-editorial text-xl text-ink">{title}</h3>
+                <p className="mt-2 text-xs font-medium tracking-wide text-ink-soft">
+                  {tags}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                   {body}
                 </p>
-              </div>
-            </motion.div>
+              </motion.div>
+
+              {i < steps.length - 1 && (
+                <div className="hidden shrink-0 items-center justify-center px-3 lg:flex">
+                  <BsArrowRight className="text-lg text-ink-soft/40" aria-hidden="true" />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
