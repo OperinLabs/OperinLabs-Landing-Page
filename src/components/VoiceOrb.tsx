@@ -46,20 +46,11 @@ export default function VoiceOrb({ onStart }: VoiceOrbProps) {
           />
         ))}
 
-        {/* Organic morphing blob */}
+        {/* Ball */}
         <motion.div
-          className="relative h-full w-full"
-          animate={{
-            borderRadius: [
-              "60% 40% 30% 70% / 60% 30% 70% 40%",
-              "30% 60% 70% 40% / 50% 60% 30% 60%",
-              "50% 60% 30% 70% / 40% 50% 60% 50%",
-              "60% 40% 30% 70% / 60% 30% 70% 40%",
-            ],
-            rotate: [0, 8, -6, 0],
-            scale: [1, 1.04, 0.98, 1],
-          }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="relative h-full w-full rounded-full"
+          animate={{ scale: [1, 1.035, 1] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
           style={{
             background:
               "linear-gradient(155deg, #0A1A5E 0%, #0057FF 55%, #9DC1FF 100%)",
