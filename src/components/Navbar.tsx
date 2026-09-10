@@ -29,7 +29,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
             <img
               src="/logo.png"
               alt="OperinLabs"
-              className="h-14 w-auto"
+              className="h-24 w-auto"
             />
           </a>
 
