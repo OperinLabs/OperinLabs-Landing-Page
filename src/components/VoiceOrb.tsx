@@ -7,10 +7,9 @@ interface VoiceOrbProps {
 }
 
 const specialties = [
-  { name: "OPD Front Desk", sub: "General appointments" },
-  { name: "Multi-specialty Hospital", sub: "Department routing" },
-  { name: "Diagnostics Lab", sub: "Test bookings & reports" },
-  { name: "Dental Clinic", sub: "Recall & reminders" },
+  { name: "OPD Clinics & Hospitals", sub: "Appointment Booking & Follow-Ups" },
+  { name: "Diagnostics Lab", sub: "Test bookings & Sample Collection" },
+  { name: "Pharmacy", sub: "Reminders & Refill" },
 ];
 
 export default function VoiceOrb({ onStart }: VoiceOrbProps) {
