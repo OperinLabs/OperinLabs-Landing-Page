@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import MobileMenu from "./MobileMenu";
@@ -7,7 +8,18 @@ interface NavbarProps {
   onBookDemo: () => void;
 }
 
-const navLinks = ["Product", "Our Thesis", "About Us", "Pricing"];
+export interface NavLink {
+  label: string;
+  href: string;
+  isRoute?: boolean;
+}
+
+export const navLinks: NavLink[] = [
+  { label: "Product", href: "/#product" },
+  { label: "Our Thesis", href: "/#our-thesis" },
+  { label: "About Us", href: "/about", isRoute: true },
+  { label: "Pricing", href: "/pricing", isRoute: true },
+];
 
 export default function Navbar({ onBookDemo }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,21 +37,31 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           aria-label="Primary"
         >
           {/* Logo */}
-          <a href="#top" className="flex shrink-0 items-center select-none">
+          <Link to="/" className="flex shrink-0 items-center select-none">
             <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
-          </a>
+          </Link>
 
           {/* Desktop links + actions, grouped together on the right */}
           <div className="hidden md:flex md:items-center md:gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replace(" ", "-")}`}
-                className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
-              >
-                {link}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             <motion.button
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
