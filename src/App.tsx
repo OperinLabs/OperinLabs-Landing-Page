@@ -1,5 +1,6 @@
 import { useNavigate, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import PricingPage from "./pages/PricingPage";
@@ -19,6 +20,8 @@ function App() {
         <Route path="/pricing" element={<PricingPage onBookDemo={goToDemo} />} />
         <Route path="/book-a-demo" element={<BookDemo />} />
       </Routes>
+
+      <Footer onBookDemo={goToDemo} />
     </div>
   );
 }
