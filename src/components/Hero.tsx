@@ -65,9 +65,10 @@ export default function Hero({ onBookDemo }: HeroProps) {
           variants={item}
           className="mt-5 max-w-[46ch] text-lg leading-relaxed text-mono-soft"
         >
-          OperinLabs picks up every clinic and hospital call in Assamese,
-          Bengali, and Hindi — booking appointments, sending reminders, and
-          recovering missed patients.
+          OperinLabs gives healthcare organisations an AI workforce that
+          works around the clock, answering calls, booking appointments,
+          sending reminders, following up, and managing refills, all in
+          Assamese, Bengali, Hindi, and English.
         </motion.p>
 
         <motion.div variants={item} className="mt-8 flex items-center gap-3">
