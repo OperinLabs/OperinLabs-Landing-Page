@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BsGrid3x3GapFill, BsGlobe2, BsCpu, BsArrowRight } from "react-icons/bs";
+import type { IconType } from "react-icons";
+import { BsGrid3X3GapFill, BsGlobe2, BsCpu, BsArrowRight } from "react-icons/bs";
 
 interface Topic {
-  icon: typeof BsGrid3x3GapFill;
+  icon: IconType;
   listLabel: string;
   cardLabel: string;
   heading: string;
@@ -13,7 +14,7 @@ interface Topic {
 
 const topics: Topic[] = [
   {
-    icon: BsGrid3x3GapFill,
+    icon: BsGrid3X3GapFill,
     listLabel: "Every call has intent",
     cardLabel: "Understanding Beats Answering",
     heading: "Every Call Has Intent",
