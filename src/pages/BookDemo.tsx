@@ -22,7 +22,7 @@ const initialState: FormState = {
 // Formspree, Netlify Forms, or your own API route to start receiving
 // real submissions.
 // ---------------------------------------------------------------------------
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORM_ENDPOINT = "https://formspree.io/f/mgaerdao";
 
 export default function BookDemo() {
   const [form, setForm] = useState<FormState>(initialState);
