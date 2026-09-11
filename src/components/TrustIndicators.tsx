@@ -1,7 +1,7 @@
 import { BsGlobe2, BsClock, BsRobot, BsBuildings } from "react-icons/bs";
 
 const items = [
-  { icon: BsGlobe2, label: "Assamese, Bengali, Hindi" },
+  { icon: BsGlobe2, label: "Assamese, Bengali, Hindi", English" },
   { icon: BsClock, label: "24/7 availability" },
   { icon: BsRobot, label: "AI-powered call answering" },
   { icon: BsBuildings, label: "Piloting in 6+ hospitals" },
