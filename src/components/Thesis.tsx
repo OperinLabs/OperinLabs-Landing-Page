@@ -128,15 +128,15 @@ export default function Thesis() {
           {/* Right: fixed-size stacked cards, purely visual — never resizes */}
           <div className="relative h-[460px] self-start">
             <div
-              className="absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-3xl border border-line bg-white/30"
+              className="absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-3xl border border-line bg-white/60"
               aria-hidden="true"
             />
             <div
-              className="absolute inset-0 translate-x-2.5 translate-y-2.5 rotate-1 rounded-3xl border border-line bg-white/50"
+              className="absolute inset-0 translate-x-2.5 translate-y-2.5 rotate-1 rounded-3xl border border-line bg-white/80"
               aria-hidden="true"
             />
             <div
-              className="absolute inset-0 translate-x-1 translate-y-1 -rotate-1 rounded-3xl border border-line bg-white/70"
+              className="absolute inset-0 translate-x-1 translate-y-1 -rotate-1 rounded-3xl border border-line bg-white"
               aria-hidden="true"
             />
             <div className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
