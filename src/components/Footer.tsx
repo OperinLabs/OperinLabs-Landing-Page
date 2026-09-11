@@ -18,13 +18,7 @@ const companyLinks = [
 
 export default function Footer({ onBookDemo }: FooterProps) {
   return (
-    <footer
-      className="px-6 pb-10 pt-40"
-      style={{
-        background:
-          "linear-gradient(to bottom, #F5F7FC 0%, #F5F7FC 4%, #3D7DFF 34%, #0057FF 52%, #0A1A5E 100%)",
-      }}
-    >
+    <footer className="bg-night px-6 pb-10 pt-40">
       <div className="mx-auto max-w-[90rem]">
         {/* Closing CTA */}
         <div className="max-w-3xl">
