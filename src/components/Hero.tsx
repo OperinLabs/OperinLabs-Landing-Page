@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import VoiceOrb from "./VoiceOrb";
 import TrustIndicators from "./TrustIndicators";
@@ -76,12 +77,12 @@ export default function Hero({ onBookDemo }: HeroProps) {
             Book a Demo
             <BsArrowRight className="text-xs" aria-hidden="true" />
           </motion.button>
-          <a
-            href="#pricing"
+          <Link
+            to="/pricing"
             className="rounded-full border border-mono-line px-6 py-3 text-sm font-medium text-mono-ink transition-colors hover:bg-white"
           >
             See pricing
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
 
