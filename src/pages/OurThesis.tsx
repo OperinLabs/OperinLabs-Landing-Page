@@ -24,10 +24,10 @@ export default function OurThesis({ onBookDemo }: OurThesisProps) {
           OperinLabs: Our Thesis
         </h1>
         <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-ink-soft">
-          We believe healthcare's front desk should never be the reason a
-          patient goes unseen. Not one generic assistant that does
-          everything poorly, but one built specifically for how clinics in
-          Assam actually receive calls.
+          We believe the next generation of healthcare software won't just
+          help teams do their work — it will do the work with them. AI
+          should be able to understand what needs to be done, take action,
+          and complete everyday healthcare operations.
         </p>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
