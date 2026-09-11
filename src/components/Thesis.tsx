@@ -125,10 +125,10 @@ export default function Thesis() {
             </div>
           </div>
 
-          {/* Right: single card, purely visual — dissolves into the section at the bottom */}
+          {/* Right: single tilted card, purely visual — dissolves into the section at the bottom */}
           <div className="relative h-[460px] self-start">
             <div
-              className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
+              className="absolute inset-0 -rotate-[16deg] overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
               style={{
                 maskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
@@ -140,7 +140,7 @@ export default function Thesis() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
-                  className="w-fit -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
+                  className="w-fit rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
                 >
                   {topic.cardLabel}
                 </motion.div>
@@ -153,13 +153,17 @@ export default function Thesis() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.35 }}
-                  className="mt-10"
+                  className="relative mt-10"
                 >
                   <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
 
                   <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
                     {topic.preview}
                   </p>
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-bg"
+                    aria-hidden="true"
+                  />
                 </motion.div>
               </AnimatePresence>
             </div>
