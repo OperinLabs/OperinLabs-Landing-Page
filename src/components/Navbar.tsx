@@ -16,7 +16,7 @@ export interface NavLink {
 
 export const navLinks: NavLink[] = [
   { label: "Product", href: "/#product" },
-  { label: "Our Thesis", href: "/#our-thesis" },
+  { label: "Our Thesis", href: "/our-thesis", isRoute: true },
   { label: "About Us", href: "/about", isRoute: true },
   { label: "Pricing", href: "/pricing", isRoute: true },
 ];
@@ -33,7 +33,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
         className="fixed top-4 sm:top-6 left-0 right-0 z-50 px-6"
       >
         <nav
-          className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 rounded-full border border-line bg-white/80 py-3 pl-4 pr-2 shadow-sm shadow-black/[0.03] backdrop-blur-md"
+          className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 rounded-full border border-line bg-white/80 py-2 pl-4 pr-2 shadow-sm shadow-black/[0.03] backdrop-blur-md"
           aria-label="Primary"
         >
           {/* Logo */}
