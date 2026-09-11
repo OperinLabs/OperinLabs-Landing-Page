@@ -4,7 +4,7 @@ const items = [
   { icon: BsGlobe2, label: "Assamese, Bengali, Hindi", "English"},
   { icon: BsClock, label: "24/7 Availability" },
   { icon: BsRobot, label: "AI-Powered Call Answering" },
-  { icon: BsBuildings, label: "Trusted by 6+ Hospitals & OPD Clinics" },
+  { icon: BsBuildings, label: "Piloting in 6+ Hospitals & OPD Clinics" },
 ];
 
 export default function TrustIndicators() {
