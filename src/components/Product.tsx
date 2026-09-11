@@ -52,14 +52,14 @@ export default function Product() {
               <h3 className="font-jakarta text-2xl font-bold uppercase tracking-wide text-ink">
                 {heading}
               </h3>
-              <p className="mt-3 text-sm font-medium text-ink">
-                {tags.map((tag, i) => (
-                  <span key={tag}>
-                    {i > 0 && " · "}
-                    {tag}
-                  </span>
+              <ul className="mt-3 flex flex-col gap-1 text-sm font-medium text-ink">
+                {tags.map((tag) => (
+                  <li key={tag} className="flex items-start gap-2">
+                    <span aria-hidden="true">•</span>
+                    <span>{tag}</span>
+                  </li>
                 ))}
-              </p>
+              </ul>
               <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
                 {body}
               </p>
