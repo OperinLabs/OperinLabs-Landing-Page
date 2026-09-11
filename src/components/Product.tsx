@@ -3,19 +3,19 @@ import { BsArrowRight } from "react-icons/bs";
 
 const boxes = [
   {
-    label: "Answering",
-    heading: "Call answering",
-    body: "OperinLabs answers instantly, in Assamese, Bengali, or Hindi, and understands what the patient needs — no more busy signals.",
+    heading: "Connect",
+    tags: ["Calls", "WhatsApp", "Missed Calls"],
+    body: "AI responds 24×7, never misses a call and understands patient intent.",
   },
   {
-    label: "Scheduling",
-    heading: "Appointment booking",
-    body: "Turns the conversation into a confirmed appointment, or a recovered patient who would otherwise have hung up.",
+    heading: "Convert",
+    tags: ["Booking", "Rescheduling", "Follow-ups"],
+    body: "Turns conversations into confirmed appointments and recovered patients.",
   },
   {
-    label: "Retention",
-    heading: "Reminders & follow-ups",
-    body: "Keeps patients engaged between visits and supports continuous care, especially for elderly patients.",
+    heading: "Retain",
+    tags: ["Reminders", "Refills", "Vitals"],
+    body: "Keeps patients engaged and supports continuous care, especially elderly patients.",
   },
 ];
 
@@ -40,26 +40,36 @@ export default function Product() {
         </motion.div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-3">
-          {boxes.map(({ label, heading, body }, i) => (
+          {boxes.map(({ heading, tags, body }, i) => (
             <motion.div
-              key={label}
+              key={heading}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
               className="flex flex-col rounded-2xl border border-line bg-white p-8"
             >
-              <p className="text-sm font-medium text-ink-soft">{label}</p>
-              <h3 className="mt-2 font-jakarta text-xl font-semibold text-ink">
+              <h3 className="font-jakarta text-2xl font-bold uppercase tracking-wide text-ink">
                 {heading}
               </h3>
+              <p className="mt-3 text-sm font-medium text-ink">
+                {tags.map((tag, i) => (
+                  <span key={tag}>
+                    {i > 0 && " · "}
+                    {tag}
+                  </span>
+                ))}
+              </p>
               <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
                 {body}
               </p>
-              <button className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft">
-                Learn more
+              <a
+                href="#pricing"
+                className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
+              >
+                Know more
                 <BsArrowRight className="text-xs" aria-hidden="true" />
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>
