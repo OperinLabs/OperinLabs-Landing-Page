@@ -23,8 +23,8 @@ export default function Footer({ onBookDemo }: FooterProps) {
         {/* Closing CTA */}
         <div className="max-w-3xl">
           <h2 className="font-editorial text-[40px] leading-[1.1] text-ink sm:text-[56px]">
-            Ready for the <em className="italic">future</em> of patient
-            calls?
+            Ready for the <em className="italic">future</em> of autonomous
+            system for healthcare operations?
           </h2>
           <button
             onClick={onBookDemo}
@@ -41,7 +41,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
             <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
             <p className="mt-4 max-w-[32ch] text-sm leading-relaxed text-ink-soft">
               The AI voice agent that answers every clinic and hospital call
-              in Assamese, Bengali, and Hindi.
+              in Assamese, Bengali, Hindi and English.
             </p>
           </div>
 
