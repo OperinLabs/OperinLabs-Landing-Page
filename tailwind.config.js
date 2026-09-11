@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         editorial: ["'Fraunces'", "serif"],
         inter: ["'Inter'", "sans-serif"],
+        jakarta: ["'Plus Jakarta Sans'", "sans-serif"],
       },
     },
   },
