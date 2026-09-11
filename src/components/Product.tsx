@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
 const boxes = [
@@ -63,13 +64,13 @@ export default function Product() {
               <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
                 {body}
               </p>
-              <a
-                href="#pricing"
+              <Link
+                to="/pricing"
                 className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
               >
                 Know more
                 <BsArrowRight className="text-xs" aria-hidden="true" />
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>
