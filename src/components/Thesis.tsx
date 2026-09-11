@@ -22,12 +22,20 @@ export default function Thesis() {
             <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
               OperinLabs: Our Thesis
             </h2>
-            <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
-              We believe healthcare's front desk should never be the reason a
-              patient goes unseen. Not one generic assistant that does
-              everything poorly, but one built specifically for how clinics
-              in Assam actually receive calls.
-            </p>
+            <div className="relative mt-4 max-h-[144px] max-w-[46ch] overflow-hidden">
+              <p className="text-base leading-relaxed text-ink-soft">
+                We believe the next generation of healthcare software won't
+                just help teams do their work — it will do the work with
+                them. AI should be able to understand what needs to be
+                done, take action, and complete everyday healthcare
+                operations. We believe healthcare needs more than software
+                that
+              </p>
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-b from-transparent to-white"
+                aria-hidden="true"
+              />
+            </div>
 
             <button
               onClick={goToFullThesis}
