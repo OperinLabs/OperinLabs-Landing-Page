@@ -7,7 +7,7 @@ interface NavbarProps {
   onBookDemo: () => void;
 }
 
-const navLinks = ["Product", "Pricing"];
+const navLinks = ["Product", "Our Thesis", "About Us", "Pricing"];
 
 export default function Navbar({ onBookDemo }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
