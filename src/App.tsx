@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -11,6 +12,20 @@ function App() {
   const location = useLocation();
   const goToDemo = () => navigate("/book-a-demo");
   const isBookDemoPage = location.pathname === "/book-a-demo";
+
+  // Every route change should land at the top of the new page, unless
+  // the link was pointing at a specific in-page anchor (e.g. /#product),
+  // in which case we scroll to that section instead.
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-bg font-inter">
