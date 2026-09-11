@@ -8,7 +8,7 @@ interface VoiceOrbProps {
 
 const specialties = [
   { name: "OPD Clinics & Hospitals", sub: "Appointment Booking & Follow-Ups" },
-  { name: "Diagnostics Lab", sub: "Test bookings & Sample Collection" },
+  { name: "Diagnostics Lab", sub: "Test Bookings & Sample Collection" },
   { name: "Pharmacy", sub: "Reminders & Refill" },
 ];
 
