@@ -126,9 +126,9 @@ export default function Thesis() {
           </div>
 
           {/* Right: single tilted card, purely visual — dissolves into the section at the bottom */}
-          <div className="relative h-[460px] self-start">
+          <div className="relative h-[460px] self-end">
             <div
-              className="absolute inset-0 rotate-[14deg] overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
+              className="absolute inset-0 rotate-[11deg] overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
               style={{
                 maskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
