@@ -1,4 +1,4 @@
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -8,7 +8,9 @@ import BookDemo from "./pages/BookDemo";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const goToDemo = () => navigate("/book-a-demo");
+  const isBookDemoPage = location.pathname === "/book-a-demo";
 
   return (
     <div className="min-h-screen bg-bg font-inter">
@@ -21,7 +23,7 @@ function App() {
         <Route path="/book-a-demo" element={<BookDemo />} />
       </Routes>
 
-      <Footer onBookDemo={goToDemo} />
+      {!isBookDemoPage && <Footer onBookDemo={goToDemo} />}
     </div>
   );
 }
