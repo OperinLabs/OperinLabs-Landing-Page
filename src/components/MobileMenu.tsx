@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import type { NavLink } from "./Navbar";
 
 interface MobileMenuProps {
-  links: string[];
+  links: NavLink[];
   onClose: () => void;
   onBookDemo: () => void;
 }
@@ -15,16 +17,27 @@ export default function MobileMenu({ links, onClose, onBookDemo }: MobileMenuPro
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed inset-0 z-40 bg-bg flex flex-col items-center justify-center gap-8 md:hidden"
     >
-      {links.map((link) => (
-        <a
-          key={link}
-          href={`#${link.toLowerCase().replace(" ", "-")}`}
-          onClick={onClose}
-          className="text-2xl font-editorial text-ink"
-        >
-          {link}
-        </a>
-      ))}
+      {links.map((link) =>
+        link.isRoute ? (
+          <Link
+            key={link.label}
+            to={link.href}
+            onClick={onClose}
+            className="text-2xl font-editorial text-ink"
+          >
+            {link.label}
+          </Link>
+        ) : (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={onClose}
+            className="text-2xl font-editorial text-ink"
+          >
+            {link.label}
+          </a>
+        )
+      )}
       <button
         onClick={onBookDemo}
         className="mt-4 rounded-xl bg-ink px-8 py-4 text-white font-medium text-lg"
