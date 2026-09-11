@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Product from "./components/Product";
-import Pricing from "./components/Pricing";
-import BookDemoModal from "./components/BookDemoModal";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import PricingPage from "./pages/PricingPage";
+import BookDemo from "./pages/BookDemo";
 
 function App() {
-  const [demoOpen, setDemoOpen] = useState(false);
+  const navigate = useNavigate();
+  const goToDemo = () => navigate("/book-a-demo");
 
   return (
     <div className="min-h-screen bg-bg font-inter">
-      <Navbar onBookDemo={() => setDemoOpen(true)} />
-      <Hero onBookDemo={() => setDemoOpen(true)} />
-      <Product />
-      <Pricing onBookDemo={() => setDemoOpen(true)} />
+      <Navbar onBookDemo={goToDemo} />
 
-      <AnimatePresence>
-        {demoOpen && <BookDemoModal onClose={() => setDemoOpen(false)} />}
-      </AnimatePresence>
+      <Routes>
+        <Route path="/" element={<Home onBookDemo={goToDemo} />} />
+        <Route path="/about" element={<AboutUs onBookDemo={goToDemo} />} />
+        <Route path="/pricing" element={<PricingPage onBookDemo={goToDemo} />} />
+        <Route path="/book-a-demo" element={<BookDemo />} />
+      </Routes>
     </div>
   );
 }
