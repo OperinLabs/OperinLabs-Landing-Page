@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
@@ -36,6 +37,8 @@ const container = {
 };
 
 export default function Hero({ onBookDemo }: HeroProps) {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <section
       id="top"
@@ -95,19 +98,28 @@ export default function Hero({ onBookDemo }: HeroProps) {
         {/* Category tabs */}
         <motion.div
           variants={item}
+          onMouseLeave={() => setActiveTab(0)}
           className="mt-14 inline-flex items-center gap-1 rounded-full border border-mono-line bg-white p-1"
         >
           {tabs.map((tab, i) => (
-            <span
+            <button
               key={tab}
+              onMouseEnter={() => setActiveTab(i)}
               className={
-                i === 0
-                  ? "rounded-full bg-mono-ink px-4 py-1.5 text-xs font-medium text-white"
-                  : "rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
+                activeTab === i
+                  ? "relative rounded-full px-4 py-1.5 text-xs font-medium text-white"
+                  : "relative rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
               }
             >
-              {tab}
-            </span>
+              {activeTab === i && (
+                <motion.span
+                  layoutId="tab-marker"
+                  className="absolute inset-0 rounded-full bg-mono-ink"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+              <span className="relative">{tab}</span>
+            </button>
           ))}
         </motion.div>
 
