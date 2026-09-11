@@ -54,91 +54,98 @@ export default function Thesis() {
 
   return (
     <section id="our-thesis" className="scroll-mt-24 bg-bg px-6 py-24">
-      <div className="mx-auto grid max-w-[90rem] gap-16 lg:grid-cols-2">
-        {/* Left: intro + topic list */}
-        <div>
-          <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
-            OperinLabs: Our Thesis
-          </h2>
-          <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
-            We believe healthcare's front desk should never be the reason a
-            patient goes unseen. Not one generic assistant that does
-            everything poorly, but one built specifically for how clinics
-            in Assam actually receive calls.
-          </p>
+      <div className="mx-auto max-w-[90rem] rounded-[40px] bg-white px-8 py-16 sm:px-14 sm:py-20">
+        <div className="grid gap-16 lg:grid-cols-2">
+          {/* Left: intro + topic list */}
+          <div>
+            <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
+              OperinLabs: Our Thesis
+            </h2>
+            <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
+              We believe healthcare's front desk should never be the reason a
+              patient goes unseen. Not one generic assistant that does
+              everything poorly, but one built specifically for how clinics
+              in Assam actually receive calls.
+            </p>
 
-          <div className="mt-10 flex flex-col gap-1">
-            {topics.map((t, i) => {
-              const Icon = t.icon;
-              return (
-                <button
-                  key={t.listLabel}
-                  onClick={() => selectTopic(i)}
-                  className={
-                    active === i
-                      ? "flex items-center gap-3 rounded-xl bg-accent-soft px-4 py-3 text-left text-sm font-medium text-ink transition-colors"
-                      : "flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft/50"
-                  }
-                >
-                  <Icon
-                    className={active === i ? "text-accent" : "text-ink-soft/60"}
-                    aria-hidden="true"
-                  />
-                  {t.listLabel}
-                </button>
-              );
-            })}
+            <button className="mt-8 inline-flex items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft">
+              Read Research
+              <BsArrowRight className="text-xs" aria-hidden="true" />
+            </button>
+
+            <div className="mt-14 flex flex-col gap-1">
+              {topics.map((t, i) => {
+                const Icon = t.icon;
+                return (
+                  <button
+                    key={t.listLabel}
+                    onClick={() => selectTopic(i)}
+                    className={
+                      active === i
+                        ? "flex items-center gap-3 rounded-xl bg-accent-soft px-4 py-3 text-left text-sm font-medium text-ink transition-colors"
+                        : "flex items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft/50"
+                    }
+                  >
+                    <Icon
+                      className={active === i ? "text-accent" : "text-ink-soft/60"}
+                      aria-hidden="true"
+                    />
+                    {t.listLabel}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* Right: rotated caption + fading/expandable paragraph */}
-        <div className="relative">
-          <motion.div
-            key={topic.cardLabel}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="-rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm w-fit"
-          >
-            {topic.cardLabel}
-          </motion.div>
-
-          <AnimatePresence mode="wait">
+          {/* Right: nested card with rotated caption + fading/expandable paragraph */}
+          <div className="relative rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
             <motion.div
-              key={topic.heading}
-              initial={{ opacity: 0, y: 10 }}
+              key={topic.cardLabel}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35 }}
-              className="mt-8"
+              className="-rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm w-fit"
             >
-              <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
+              {topic.cardLabel}
+            </motion.div>
 
-              <div className="relative mt-4">
-                <p className="text-[15px] leading-relaxed text-ink-soft">
-                  {topic.preview}
-                  {expanded && " " + topic.rest}
-                </p>
-                {!expanded && (
-                  <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-bg"
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={topic.heading}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35 }}
+                className="mt-8"
+              >
+                <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
+
+                <div className="relative mt-4">
+                  <p className="text-[15px] leading-relaxed text-ink-soft">
+                    {topic.preview}
+                    {expanded && " " + topic.rest}
+                  </p>
+                  {!expanded && (
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+
+                <button
+                  onClick={() => setExpanded((v) => !v)}
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-accent"
+                >
+                  {expanded ? "Show less" : "Read more"}
+                  <BsArrowRight
+                    className={`text-xs transition-transform ${expanded ? "rotate-90" : ""}`}
                     aria-hidden="true"
                   />
-                )}
-              </div>
-
-              <button
-                onClick={() => setExpanded((v) => !v)}
-                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-accent"
-              >
-                {expanded ? "Show less" : "Read more"}
-                <BsArrowRight
-                  className={`text-xs transition-transform ${expanded ? "rotate-90" : ""}`}
-                  aria-hidden="true"
-                />
-              </button>
-            </motion.div>
-          </AnimatePresence>
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
