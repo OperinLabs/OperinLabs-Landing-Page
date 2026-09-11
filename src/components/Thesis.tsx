@@ -125,59 +125,26 @@ export default function Thesis() {
             </div>
           </div>
 
-          {/* Right: fixed-size stacked cards, purely visual — never resizes */}
+          {/* Right: single card, purely visual — dissolves into the section at the bottom */}
           <div className="relative h-[460px] self-start">
-            <div
-              className="absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-3xl border border-line bg-white/60"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 translate-x-2.5 translate-y-2.5 rotate-1 rounded-3xl border border-line bg-white/80"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 translate-x-1 translate-y-1 -rotate-1 rounded-3xl border border-line bg-white"
-              aria-hidden="true"
-            />
             <div
               className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
               style={{
-                maskImage: "linear-gradient(to bottom, black 78%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 78%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
               }}
             >
-              <div className="relative w-fit">
-                {/* Three stacked back-notes, each showing a hint of another topic's caption */}
-                <div
-                  className="absolute -inset-1 flex translate-x-3 translate-y-3 rotate-6 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/45 px-5 py-2.5 text-sm text-ink-soft/70"
-                  aria-hidden="true"
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={topic.cardLabel}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="w-fit -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
                 >
-                  {topics[(active + 1) % topics.length].cardLabel}
-                </div>
-                <div
-                  className="absolute -inset-1 flex translate-x-2 translate-y-2 rotate-4 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/65 px-5 py-2.5 text-sm text-ink-soft/80"
-                  aria-hidden="true"
-                >
-                  {topics[(active + 2) % topics.length].cardLabel}
-                </div>
-                <div
-                  className="absolute -inset-1 flex translate-x-1 translate-y-1 rotate-2 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/85 px-5 py-2.5 text-sm text-ink-soft"
-                  aria-hidden="true"
-                >
-                  {topics[(active + 1) % topics.length].cardLabel}
-                </div>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={topic.cardLabel}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
-                    className="relative -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
-                  >
-                    {topic.cardLabel}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                  {topic.cardLabel}
+                </motion.div>
+              </AnimatePresence>
 
               <AnimatePresence mode="wait">
                 <motion.div
@@ -190,15 +157,9 @@ export default function Thesis() {
                 >
                   <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
 
-                  <div className="relative mt-4">
-                    <p className="text-[15px] leading-relaxed text-ink-soft">
-                      {topic.preview}
-                    </p>
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
-                      aria-hidden="true"
-                    />
-                  </div>
+                  <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
+                    {topic.preview}
+                  </p>
                 </motion.div>
               </AnimatePresence>
             </div>
