@@ -139,13 +139,33 @@ export default function Thesis() {
               className="absolute inset-0 translate-x-1 translate-y-1 -rotate-1 rounded-3xl border border-line bg-white"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
+            <div
+              className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
+              style={{
+                maskImage: "linear-gradient(to bottom, black 78%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 78%, transparent 100%)",
+              }}
+            >
               <div className="relative w-fit">
-                {/* Back note, subtly offset and rotated the other way */}
+                {/* Three stacked back-notes, each showing a hint of another topic's caption */}
                 <div
-                  className="absolute -inset-1 translate-x-1.5 translate-y-1.5 rotate-2 rounded-xl border border-line bg-white/70"
+                  className="absolute -inset-1 flex translate-x-3 translate-y-3 rotate-6 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/45 px-5 py-2.5 text-sm text-ink-soft/70"
                   aria-hidden="true"
-                />
+                >
+                  {topics[(active + 1) % topics.length].cardLabel}
+                </div>
+                <div
+                  className="absolute -inset-1 flex translate-x-2 translate-y-2 rotate-4 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/65 px-5 py-2.5 text-sm text-ink-soft/80"
+                  aria-hidden="true"
+                >
+                  {topics[(active + 2) % topics.length].cardLabel}
+                </div>
+                <div
+                  className="absolute -inset-1 flex translate-x-1 translate-y-1 rotate-2 items-center overflow-hidden whitespace-nowrap rounded-xl border border-line bg-white/85 px-5 py-2.5 text-sm text-ink-soft"
+                  aria-hidden="true"
+                >
+                  {topics[(active + 1) % topics.length].cardLabel}
+                </div>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={topic.cardLabel}
