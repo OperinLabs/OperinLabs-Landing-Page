@@ -125,49 +125,63 @@ export default function Thesis() {
             </div>
           </div>
 
-          {/* Right: purely visual "stacked notes" — rotated label + fading preview, no interaction */}
-          <div className="relative rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
-            <div className="relative w-fit">
-              {/* Back note, subtly offset and rotated the other way */}
-              <div
-                className="absolute -inset-1 translate-x-1.5 translate-y-1.5 rotate-2 rounded-xl border border-line bg-white/70"
-                aria-hidden="true"
-              />
+          {/* Right: fixed-size stacked cards, purely visual — never resizes */}
+          <div className="relative h-[460px] self-start">
+            <div
+              className="absolute inset-0 translate-x-4 translate-y-4 rotate-3 rounded-3xl border border-line bg-white/30"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-0 translate-x-2.5 translate-y-2.5 rotate-1 rounded-3xl border border-line bg-white/50"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-0 translate-x-1 translate-y-1 -rotate-1 rounded-3xl border border-line bg-white/70"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
+              <div className="relative w-fit">
+                {/* Back note, subtly offset and rotated the other way */}
+                <div
+                  className="absolute -inset-1 translate-x-1.5 translate-y-1.5 rotate-2 rounded-xl border border-line bg-white/70"
+                  aria-hidden="true"
+                />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={topic.cardLabel}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="relative -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
+                  >
+                    {topic.cardLabel}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={topic.cardLabel}
-                  initial={{ opacity: 0, y: 8 }}
+                  key={topic.heading}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.35 }}
-                  className="relative -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
+                  className="mt-10"
                 >
-                  {topic.cardLabel}
+                  <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
+
+                  <div className="relative mt-4">
+                    <p className="text-[15px] leading-relaxed text-ink-soft">
+                      {topic.preview}
+                    </p>
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
+                      aria-hidden="true"
+                    />
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={topic.heading}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35 }}
-                className="mt-10"
-              >
-                <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
-
-                <div className="relative mt-4">
-                  <p className="text-[15px] leading-relaxed text-ink-soft">
-                    {topic.preview}
-                  </p>
-                  <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
-                    aria-hidden="true"
-                  />
-                </div>
-              </motion.div>
-            </AnimatePresence>
           </div>
         </div>
       </div>
