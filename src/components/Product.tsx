@@ -4,19 +4,19 @@ import { BsArrowRight } from "react-icons/bs";
 
 const boxes = [
   {
-    heading: "Connect",
-    tags: ["Calls", "WhatsApp", "Missed Calls"],
-    body: "AI responds 24×7, never misses a call and understands patient intent.",
+    heading: "Answer",
+    tags: ["Calls", "WhatsApp", "Patient Queries"],
+    body: "Answers patients 24×7 in Assamese, Bengali, Hindi and English.",
   },
   {
-    heading: "Convert",
-    tags: ["Booking", "Rescheduling", "Follow-ups"],
-    body: "Turns conversations into confirmed appointments and recovered patients.",
+    heading: "Act",
+    tags: ["Bookings", "Rescheduling", "Reminders", "Follow-ups"],
+    body: "Takes action on patient requests instead of simply answering them.",
   },
   {
-    heading: "Retain",
-    tags: ["Reminders", "Refills", "Vitals"],
-    body: "Keeps patients engaged and supports continuous care, especially elderly patients.",
+    heading: "Complete",
+    tags: ["Refills", "Patient Requests", "Operations", "Escalations"],
+    body: "Gets repetitive work done and brings your team in when human help is needed.",
   },
 ];
 
@@ -32,11 +32,11 @@ export default function Product() {
           className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
         >
           <h2 className="font-jakarta font-semibold text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
-            One line. Every patient handled.
+            One AI workforce. Multiple jobs. One system
           </h2>
           <p className="max-w-[38ch] text-base leading-relaxed text-ink-soft sm:text-right">
-            Build using the same call your front desk already answers —
-            just never missed.
+            OperinLabs handles the repetitive work between your patients and
+            your team, from the first call to the final follow-up.
           </p>
         </motion.div>
 
