@@ -146,7 +146,7 @@ export default function BookDemo() {
                 Tell us how we can help
               </h2>
               <p className="text-ink-soft text-sm mt-2 mb-8">
-                We'll be in touch within one business day.
+                We'll be in touch within 60 minutes.
               </p>
 
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
