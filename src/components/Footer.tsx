@@ -87,10 +87,10 @@ export default function Footer({ onBookDemo }: FooterProps) {
           </div>
 
           <div>
-            <p className="text-sm font-medium text-ink">Get in touch</p>
+            <p className="text-sm font-medium text-ink">Support</p>
             <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
-              <li>hello@operinlabs.com</li>
-              <li>Guwahati, Assam, India</li>
+              <li>rajgoswami.co@gmail.com</li>
+              <li>Guwahati 03, Assam, India</li>
             </ul>
           </div>
         </div>
