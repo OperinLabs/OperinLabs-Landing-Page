@@ -39,7 +39,7 @@ export default function Product() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
           {boxes.map(({ label, heading, body }, i) => (
             <motion.div
               key={label}
@@ -47,7 +47,7 @@ export default function Product() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
-              className="flex flex-col bg-bg p-8"
+              className="flex flex-col rounded-2xl border border-line bg-white p-8"
             >
               <p className="text-sm font-medium text-ink-soft">{label}</p>
               <h3 className="mt-2 font-jakarta text-xl font-semibold text-ink">
