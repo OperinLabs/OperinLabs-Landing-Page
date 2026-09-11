@@ -56,7 +56,7 @@ export default function Thesis() {
     <section id="our-thesis" className="scroll-mt-24 bg-bg px-6 py-24">
       <div className="mx-auto max-w-[90rem] rounded-[40px] bg-white px-8 py-16 sm:px-14 sm:py-20">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left: intro + topic list */}
+          {/* Left: intro + Read more (expands full article here) + topic list */}
           <div>
             <h2 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
               OperinLabs: Our Thesis
@@ -68,10 +68,38 @@ export default function Thesis() {
               in Assam actually receive calls.
             </p>
 
-            <button className="mt-8 inline-flex items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft">
-              Read Research
-              <BsArrowRight className="text-xs" aria-hidden="true" />
+            <button
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-8 inline-flex items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
+            >
+              {expanded ? "Show less" : "Read more"}
+              <BsArrowRight
+                className={`text-xs transition-transform ${expanded ? "rotate-90" : ""}`}
+                aria-hidden="true"
+              />
             </button>
+
+            <AnimatePresence>
+              {expanded && (
+                <motion.div
+                  key={topic.heading}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-6 max-w-[46ch] border-t border-line pt-6">
+                    <h3 className="font-editorial text-xl text-ink">
+                      {topic.heading}
+                    </h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
+                      {topic.preview} {topic.rest}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div className="mt-14 flex flex-col gap-1">
               {topics.map((t, i) => {
@@ -97,17 +125,26 @@ export default function Thesis() {
             </div>
           </div>
 
-          {/* Right: nested card with rotated caption + fading/expandable paragraph */}
+          {/* Right: purely visual "stacked notes" — rotated label + fading preview, no interaction */}
           <div className="relative rounded-3xl border border-line bg-bg/60 p-8 sm:p-10">
-            <motion.div
-              key={topic.cardLabel}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="-rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm w-fit"
-            >
-              {topic.cardLabel}
-            </motion.div>
+            <div className="relative w-fit">
+              {/* Back note, subtly offset and rotated the other way */}
+              <div
+                className="absolute -inset-1 translate-x-1.5 translate-y-1.5 rotate-2 rounded-xl border border-line bg-white/70"
+                aria-hidden="true"
+              />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={topic.cardLabel}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="relative -rotate-2 rounded-xl border border-line bg-white px-5 py-2.5 text-sm text-ink-soft shadow-sm"
+                >
+                  {topic.cardLabel}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -116,33 +153,19 @@ export default function Thesis() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35 }}
-                className="mt-8"
+                className="mt-10"
               >
                 <h3 className="font-editorial text-2xl text-ink">{topic.heading}</h3>
 
                 <div className="relative mt-4">
                   <p className="text-[15px] leading-relaxed text-ink-soft">
                     {topic.preview}
-                    {expanded && " " + topic.rest}
                   </p>
-                  {!expanded && (
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
-                      aria-hidden="true"
-                    />
-                  )}
-                </div>
-
-                <button
-                  onClick={() => setExpanded((v) => !v)}
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-accent"
-                >
-                  {expanded ? "Show less" : "Read more"}
-                  <BsArrowRight
-                    className={`text-xs transition-transform ${expanded ? "rotate-90" : ""}`}
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"
                     aria-hidden="true"
                   />
-                </button>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
