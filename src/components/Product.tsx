@@ -1,23 +1,23 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BsArrowRight, BsChatDots, BsLightningCharge, BsCheckCircle } from "react-icons/bs";
+import { BsArrowRight, BsSoundwave, BsCalendarCheck, BsArrowRepeat } from "react-icons/bs";
 
 const boxes = [
   {
     heading: "Understands",
-    icon: BsChatDots,
+    icon: BsSoundwave,
     tags: ["Calls", "WhatsApp", "Patient Queries"],
     body: "Answers patients 24×7 in Assamese, Bengali, Hindi and English.",
   },
   {
     heading: "Acts",
-    icon: BsLightningCharge,
+    icon: BsCalendarCheck,
     tags: ["Bookings", "Rescheduling", "Reminders", "Follow-ups"],
     body: "Takes action on patient requests instead of simply answering them.",
   },
   {
     heading: "Follows",
-    icon: BsCheckCircle,
+    icon: BsArrowRepeat,
     tags: ["Refills", "Patient Requests", "Operations", "Escalations"],
     body: "Gets repetitive work done and brings your team in when human help is needed.",
   },
@@ -32,14 +32,12 @@ export default function Product() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-3xl"
+          className="w-full"
         >
-          <h2 className="font-jakarta font-semibold text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
-            From Interaction to Autonomous Execution. Built for
-            <br />
-            Healthcare.
+          <h2 className="whitespace-nowrap font-jakarta font-semibold text-ink text-[22px] sm:text-[30px] lg:text-[36px] leading-[1.1] tracking-[-0.01em]">
+            From Interaction to Autonomous Execution. Built for Healthcare.
           </h2>
-          <p className="mt-4 max-w-[44ch] text-base leading-relaxed text-ink-soft">
+          <p className="mt-4 whitespace-nowrap text-base leading-relaxed text-ink-soft">
             OperinLabs is the autonomous execution layer that turns every
             interaction into action.
           </p>
