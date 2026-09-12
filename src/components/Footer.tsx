@@ -118,7 +118,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
             </div>
           </div>
 
-          <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
+          <img src="/logo.png" alt="OperinLabs" className="h-12 w-auto" />
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
