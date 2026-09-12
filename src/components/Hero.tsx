@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
 import VoiceOrb from "./VoiceOrb";
 import TrustIndicators from "./TrustIndicators";
 
@@ -52,7 +50,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
       >
         <motion.h1
           variants={container}
-          className="max-w-[45rem] font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
+          className="max-w-none font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
         >
           {headline.map((w, i) => (
             <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
@@ -63,31 +61,13 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.p
           variants={item}
-          className="mt-5 max-w-[46ch] text-lg leading-relaxed text-mono-soft"
+          className="mt-5 max-w-none text-lg leading-relaxed text-mono-soft"
         >
           OperinLabs gives healthcare organisations an AI workforce that
           works around the clock, answering calls, booking appointments,
           sending reminders, following up, and managing refills, all in
           Assamese, Bengali, Hindi, and English.
         </motion.p>
-
-        <motion.div variants={item} className="mt-8 flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onBookDemo}
-            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
-          >
-            Book a Demo
-            <BsArrowRight className="text-xs" aria-hidden="true" />
-          </motion.button>
-          <Link
-            to="/pricing"
-            className="rounded-full border border-mono-line px-6 py-3 text-sm font-medium text-mono-ink transition-colors hover:bg-white"
-          >
-            See pricing
-          </Link>
-        </motion.div>
       </motion.div>
 
       <motion.div
