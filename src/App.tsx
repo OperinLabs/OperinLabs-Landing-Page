@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<Home onBookDemo={goToDemo} />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/pricing" element={<PricingPage onBookDemo={goToDemo} />} />
-        <Route path="/our-thesis" element={<OurThesis onBookDemo={goToDemo} />} />
+        <Route path="/our-thesis" element={<OurThesis />} />
         <Route path="/book-a-demo" element={<BookDemo />} />
       </Routes>
 
