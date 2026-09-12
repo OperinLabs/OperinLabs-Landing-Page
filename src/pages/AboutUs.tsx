@@ -21,21 +21,6 @@ const bodyBlocks: BodyBlock[] = [
   { text: "OperinLabs is building that workforce." },
 ];
 
-const values = [
-  {
-    heading: "Built for Assam first",
-    body: "We started with the clinics and hospitals nearest to us, in languages the big voice-AI platforms don't prioritize.",
-  },
-  {
-    heading: "No patient left on hold",
-    body: "Every product decision traces back to one question: does this stop a call from going unanswered?",
-  },
-  {
-    heading: "Small team, real accountability",
-    body: "We're piloting directly with hospital staff, not shipping into a black box — feedback reaches us the same week.",
-  },
-];
-
 export default function AboutUs() {
   return (
     <section className="bg-bg px-6 pb-24 pt-36 sm:pt-40">
@@ -70,23 +55,6 @@ export default function AboutUs() {
             ))}
           </div>
         </motion.div>
-
-        <div className="mt-20 grid gap-6 border-t border-line pt-14 sm:grid-cols-3">
-          {values.map(({ heading, body }, i) => (
-            <motion.div
-              key={heading}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
-            >
-              <h3 className="font-editorial text-xl text-ink">{heading}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-                {body}
-              </p>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
