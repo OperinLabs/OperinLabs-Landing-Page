@@ -41,7 +41,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
   return (
     <section
       id="top"
-      className="scroll-mt-24 bg-mono-bg px-6 pb-20 pt-36 sm:pt-40"
+      className="scroll-mt-24 bg-mono-bg px-6 pb-20 pt-24 sm:pt-28"
     >
       <motion.div
         variants={container}
