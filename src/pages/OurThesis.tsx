@@ -23,7 +23,7 @@ export default function OurThesis({ onBookDemo }: OurThesisProps) {
         <h1 className="mt-3 max-w-2xl font-editorial font-medium text-ink text-[36px] sm:text-[48px] leading-[1.1] tracking-[-0.01em]">
           OperinLabs: Our Thesis
         </h1>
-        <p className="mt-6 max-w-[58ch] text-lg leading-relaxed text-ink-soft">
+        <p className="mt-6 max-w-none text-lg leading-relaxed text-ink-soft">
           We believe the next generation of healthcare software won't just
           help teams do their work — it will do the work with them. AI
           should be able to understand what needs to be done, take action,
