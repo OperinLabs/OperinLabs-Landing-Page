@@ -124,10 +124,6 @@ export default function Pricing({ onBookDemo }: PricingProps) {
             </motion.div>
           ))}
         </div>
-
-        <p className="mt-8 text-center text-xs text-ink-soft">
-          Sample pricing shown for planning purposes — confirm final numbers before publishing.
-        </p>
       </div>
     </section>
   );
