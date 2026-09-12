@@ -15,6 +15,7 @@ export interface NavLink {
 }
 
 export const navLinks: NavLink[] = [
+  { label: "Home", href: "/", isRoute: true },
   { label: "Product", href: "/#product" },
   { label: "Our Thesis", href: "/our-thesis", isRoute: true },
   { label: "About Us", href: "/about", isRoute: true },
@@ -38,7 +39,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
         >
           {/* Logo */}
           <Link to="/" className="flex shrink-0 items-center select-none">
-            <img src="/logo.png" alt="OperinLabs" className="h-10 w-auto" />
+            <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop links + actions, grouped together on the right */}
@@ -66,7 +67,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
               onClick={onBookDemo}
-              className="ml-1 rounded-full bg-ink px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-accent"
+              className="ml-1 rounded-full bg-ink px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-accent"
             >
               Book a Demo
             </motion.button>
