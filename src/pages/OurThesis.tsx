@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { BsArrowRight } from "react-icons/bs";
 import { thesisTopics as topics } from "../lib/thesisTopics";
-
-interface OurThesisProps {
-  onBookDemo: () => void;
-}
 
 type EssayBlock = { text: string; bold?: boolean };
 
@@ -61,7 +56,7 @@ const essay: EssayBlock[] = [
   { text: "That is the thesis behind OperinLabs." },
 ];
 
-export default function OurThesis({ onBookDemo }: OurThesisProps) {
+export default function OurThesis() {
   const [searchParams] = useSearchParams();
   const initialIndex = Number(searchParams.get("topic"));
   const [active, setActive] = useState(
@@ -158,21 +153,12 @@ export default function OurThesis({ onBookDemo }: OurThesisProps) {
           <p className="max-w-[46ch] text-ink-soft">
             See this thesis in action — talk to OperinLabs directly.
           </p>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={onBookDemo}
-              className="inline-flex items-center gap-1.5 rounded-full bg-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent"
-            >
-              Book a Demo
-              <BsArrowRight className="text-xs" aria-hidden="true" />
-            </button>
-            <Link
-              to="/"
-              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
-            >
-              Back to home
-            </Link>
-          </div>
+          <Link
+            to="/"
+            className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+          >
+            Back to home
+          </Link>
         </div>
       </div>
     </section>
