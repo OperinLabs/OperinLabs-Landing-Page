@@ -151,7 +151,7 @@ export default function OurThesis() {
 
         <div className="mt-20 flex flex-col items-start gap-4 border-t border-line pt-10 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[46ch] text-ink-soft">
-            See this thesis in action — talk to OperinLabs directly.
+            See this thesis in action, talk to OperinLabs directly.
           </p>
           <Link
             to="/"
