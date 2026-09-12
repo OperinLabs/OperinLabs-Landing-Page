@@ -25,7 +25,7 @@ export default function Thesis() {
             <div className="relative mt-4 max-h-[144px] max-w-[46ch] overflow-hidden">
               <p className="text-base leading-relaxed text-ink-soft">
                 We believe the next generation of healthcare software won't
-                just help teams do their work — it will do the work with
+                just help teams do their work, it will do the work with
                 them. AI should be able to understand what needs to be
                 done, take action, and complete everyday healthcare
                 operations. We believe healthcare needs more than software
