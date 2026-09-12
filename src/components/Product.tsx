@@ -4,17 +4,17 @@ import { BsArrowRight } from "react-icons/bs";
 
 const boxes = [
   {
-    heading: "Answer",
+    heading: "Understands",
     tags: ["Calls", "WhatsApp", "Patient Queries"],
     body: "Answers patients 24×7 in Assamese, Bengali, Hindi and English.",
   },
   {
-    heading: "Act",
+    heading: "Acts",
     tags: ["Bookings", "Rescheduling", "Reminders", "Follow-ups"],
     body: "Takes action on patient requests instead of simply answering them.",
   },
   {
-    heading: "Complete",
+    heading: "Follows",
     tags: ["Refills", "Patient Requests", "Operations", "Escalations"],
     body: "Gets repetitive work done and brings your team in when human help is needed.",
   },
@@ -32,11 +32,11 @@ export default function Product() {
           className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
         >
           <h2 className="font-jakarta font-semibold text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
-            One AI workforce. Multiple jobs. One system
+            From Interaction to Autonomous Execution. Built for Healthcare.
           </h2>
-          <p className="max-w-[38ch] text-base leading-relaxed text-ink-soft sm:text-right">
-            OperinLabs handles the repetitive work between your patients and
-            your team, from the first call to the final follow-up.
+          <p className="max-w-[44ch] text-base leading-relaxed text-ink-soft sm:text-right">
+            OperinLabs is the autonomous execution layer that turns every
+            interaction into action.
           </p>
         </motion.div>
 
