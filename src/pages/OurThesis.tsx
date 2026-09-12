@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { thesisTopics as topics } from "../lib/thesisTopics";
 
@@ -149,16 +149,10 @@ export default function OurThesis() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col items-start gap-4 border-t border-line pt-10 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 border-t border-line pt-10">
           <p className="max-w-[46ch] text-ink-soft">
-            See this thesis in action, talk to OperinLabs directly.
+            See this thesis in action — talk to OperinLabs directly.
           </p>
-          <Link
-            to="/"
-            className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
-          >
-            Back to home
-          </Link>
         </div>
       </div>
     </section>
