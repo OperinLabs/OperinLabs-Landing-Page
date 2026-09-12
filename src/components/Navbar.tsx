@@ -38,7 +38,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
         >
           {/* Logo */}
           <Link to="/" className="flex shrink-0 items-center select-none">
-            <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
+            <img src="/logo.png" alt="OperinLabs" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop links + actions, grouped together on the right */}
