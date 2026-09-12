@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import MinimalHeader from "./components/MinimalHeader";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import PricingPage from "./pages/PricingPage";
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg font-inter">
-      <Navbar onBookDemo={goToDemo} />
+      {isBookDemoPage ? <MinimalHeader /> : <Navbar onBookDemo={goToDemo} />}
 
       <Routes>
         <Route path="/" element={<Home onBookDemo={goToDemo} />} />
