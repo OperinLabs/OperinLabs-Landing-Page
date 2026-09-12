@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BsArrowRight, BsEnvelope, BsTelephone, BsGeoAlt, BsLinkedin } from "react-icons/bs";
+import { BsArrowRight, BsLinkedin } from "react-icons/bs";
 
 interface FooterProps {
   onBookDemo: () => void;
@@ -92,27 +92,13 @@ export default function Footer({ onBookDemo }: FooterProps) {
             <div>
               <p className="text-sm font-medium text-ink">Support</p>
               <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
-                <li className="flex items-center gap-2">
-                  <BsEnvelope className="text-ink-soft/70" aria-hidden="true" />
+                <li>
                   <a
                     href="mailto:hello@operinlabs.com"
                     className="transition-colors hover:text-ink"
                   >
                     hello@operinlabs.com
                   </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <BsTelephone className="text-ink-soft/70" aria-hidden="true" />
-                  <a
-                    href="tel:+917637918344"
-                    className="transition-colors hover:text-ink"
-                  >
-                    +91 76379 18344
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <BsGeoAlt className="text-ink-soft/70" aria-hidden="true" />
-                  Maniram Dewan Rd, Guwahati 03 (Assam)
                 </li>
               </ul>
             </div>
