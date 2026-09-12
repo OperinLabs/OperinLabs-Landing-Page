@@ -101,10 +101,10 @@ export default function BookDemo() {
             <div className="mt-8 border-t border-line pt-6">
               <p className="text-[15px] leading-relaxed text-ink">
                 "OperinLabs picked up calls we would've otherwise missed
-                after hours — patients stopped falling through the cracks."
+                after hours, patients stopped falling through the cracks."
               </p>
               <p className="mt-3 text-sm text-ink-soft">
-                Front desk lead, pilot hospital in Assam
+                Head of Operations, pilot hospital in Assam
               </p>
             </div>
           </div>
