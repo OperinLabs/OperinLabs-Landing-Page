@@ -85,7 +85,7 @@ export default function OurThesis({ onBookDemo }: OurThesisProps) {
           needs AI that can actually do the work.
         </p>
 
-        <div className="mt-14 max-w-[70ch] space-y-5 border-t border-line pt-14">
+        <div className="mt-14 max-w-none space-y-5 border-t border-line pt-14">
           {essay.map((block, i) => (
             <p
               key={i}
