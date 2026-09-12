@@ -36,9 +36,9 @@ export default function Footer({ onBookDemo }: FooterProps) {
           </button>
         </div>
 
-        {/* Link columns clustered on the left, logo set apart on the right */}
+        {/* Link columns clustered on the left, logo + LinkedIn set apart on the right */}
         <div className="mt-32 flex flex-col gap-12 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex flex-col gap-12 sm:flex-row sm:gap-16">
+          <div className="grid grid-cols-1 gap-y-12 sm:w-[36rem] sm:grid-cols-3 sm:gap-x-16">
             <div>
               <p className="text-sm font-medium text-ink">Product</p>
               <ul className="mt-4 flex flex-col gap-3">
@@ -118,22 +118,24 @@ export default function Footer({ onBookDemo }: FooterProps) {
             </div>
           </div>
 
-          <img src="/logo.png" alt="OperinLabs" className="h-10 w-auto" />
+          <div className="flex flex-col items-start gap-4 sm:items-end">
+            <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
+            <a
+              href="https://www.linkedin.com/company/operinlabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="OperinLabs on LinkedIn"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:text-ink"
+            >
+              <BsLinkedin aria-hidden="true" />
+            </a>
+          </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 border-t border-line pt-6">
           <p className="text-xs text-ink-soft">
             © {new Date().getFullYear()} OperinLabs. All rights reserved.
           </p>
-          <a
-            href="https://www.linkedin.com/company/operinlabs"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="OperinLabs on LinkedIn"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:text-ink"
-          >
-            <BsLinkedin aria-hidden="true" />
-          </a>
         </div>
       </div>
     </footer>
