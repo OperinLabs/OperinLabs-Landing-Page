@@ -7,7 +7,8 @@ interface HeroProps {
   onBookDemo: () => void;
 }
 
-const headline = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous", "healthcare", "operations"];
+const headlineLine1 = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous"];
+const headlineLine2 = ["healthcare", "operations"];
 
 const tabs = ["Answering", "Booking", "Rescheduling", "Reminders", "Follow-ups", "Refill"];
 
@@ -50,23 +51,34 @@ export default function Hero({ onBookDemo }: HeroProps) {
       >
         <motion.h1
           variants={container}
-          className="max-w-none font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
+          className="w-full font-editorial font-medium leading-[1.05] tracking-[-0.01em] text-mono-ink text-[36px] sm:text-[46px] md:text-[56px]"
         >
-          {headline.map((w, i) => (
-            <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
-              {w}
-            </motion.span>
-          ))}
+          <span className="flex w-full justify-between">
+            {headlineLine1.map((w, i) => (
+              <motion.span key={i} variants={word} className="inline-block">
+                {w}
+              </motion.span>
+            ))}
+          </span>
+          <span className="mt-1 flex w-full justify-center gap-[0.3em]">
+            {headlineLine2.map((w, i) => (
+              <motion.span key={i} variants={word} className="inline-block">
+                {w}
+              </motion.span>
+            ))}
+          </span>
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="mt-5 max-w-none text-lg leading-relaxed text-mono-soft"
+          className="mt-5 w-full text-lg leading-relaxed text-mono-soft"
+          style={{ textAlign: "justify", textAlignLast: "justify" }}
         >
           OperinLabs gives healthcare organisations an AI workforce that
           works around the clock, answering calls, booking appointments,
           sending reminders, following up, and managing refills, all in
-          Assamese, Bengali, Hindi, and English.
+          Assamese, Bengali, Hindi, and English, turning conversations into
+          decisions, actions, and completed workflows, autonomously.
         </motion.p>
       </motion.div>
 
