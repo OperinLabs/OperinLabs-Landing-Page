@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight, BsEnvelope, BsTelephone, BsLinkedin } from "react-icons/bs";
 
 interface FooterProps {
   onBookDemo: () => void;
@@ -20,8 +20,8 @@ export default function Footer({ onBookDemo }: FooterProps) {
   return (
     <footer className="bg-bg px-6 pb-10 pt-40">
       <div className="mx-auto max-w-[90rem]">
-        {/* Closing CTA */}
-        <div className="max-w-3xl">
+        {/* Closing CTA — now stretches the full width, matching the navbar */}
+        <div className="max-w-none">
           <h2 className="font-editorial text-[40px] leading-[1.1] text-ink sm:text-[56px]">
             Ready for the <em className="italic">future</em> of autonomous
             system for healthcare operations?
@@ -35,16 +35,8 @@ export default function Footer({ onBookDemo }: FooterProps) {
           </button>
         </div>
 
-        {/* Link columns */}
+        {/* Link columns — Product / Company / Support on the left, logo on the right */}
         <div className="mt-32 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <img src="/logo.png" alt="OperinLabs" className="h-8 w-auto" />
-            <p className="mt-4 max-w-[32ch] text-sm leading-relaxed text-ink-soft">
-              The AI voice agent that answers every clinic and hospital call
-              in Assamese, Bengali, Hindi and English.
-            </p>
-          </div>
-
           <div>
             <p className="text-sm font-medium text-ink">Product</p>
             <ul className="mt-4 flex flex-col gap-3">
@@ -89,9 +81,38 @@ export default function Footer({ onBookDemo }: FooterProps) {
           <div>
             <p className="text-sm font-medium text-ink">Support</p>
             <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
-              <li>rajgoswami.co@gmail.com</li>
-              <li>Guwahati 03, Assam, India</li>
+              <li className="flex items-center gap-2">
+                <BsEnvelope className="text-ink-soft/70" aria-hidden="true" />
+                <a
+                  href="mailto:hello@operinlabs.com"
+                  className="transition-colors hover:text-ink"
+                >
+                  hello@operinlabs.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <BsTelephone className="text-ink-soft/70" aria-hidden="true" />
+                <a
+                  href="tel:+917637918344"
+                  className="transition-colors hover:text-ink"
+                >
+                  +91 76379 18344
+                </a>
+              </li>
+              <li>Guwahati, Assam, India</li>
             </ul>
+          </div>
+
+          <div className="sm:text-right">
+            <img
+              src="/logo.png"
+              alt="OperinLabs"
+              className="h-8 w-auto sm:ml-auto"
+            />
+            <p className="mt-4 max-w-[32ch] text-sm leading-relaxed text-ink-soft sm:ml-auto">
+              The AI voice agent that answers every clinic and hospital call
+              in Assamese, Bengali, and Hindi.
+            </p>
           </div>
         </div>
 
@@ -99,9 +120,20 @@ export default function Footer({ onBookDemo }: FooterProps) {
           <p className="text-xs text-ink-soft">
             © {new Date().getFullYear()} OperinLabs. All rights reserved.
           </p>
-          <p className="text-xs text-ink-soft">
-            Built for clinics and hospitals across Assam.
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-ink-soft">
+              Built for clinics and hospitals across Assam.
+            </p>
+            <a
+              href="https://www.linkedin.com/company/operinlabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="OperinLabs on LinkedIn"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:text-ink"
+            >
+              <BsLinkedin aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
