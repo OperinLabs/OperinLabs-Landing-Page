@@ -22,7 +22,7 @@ const initialState: FormState = {
 // Formspree, Netlify Forms, or your own API route to start receiving
 // real submissions.
 // ---------------------------------------------------------------------------
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORM_ENDPOINT = "https://formspree.io/f/mgaerdao";
 
 export default function BookDemo() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -106,33 +106,35 @@ export default function BookDemo() {
             while making sure no patient call goes unanswered.
           </p>
 
-          {/* Highlighted stats block */}
-          <div className="mt-10 rounded-2xl bg-accent-soft p-6">
-            <div className="flex gap-10">
-              <div>
-                <p className="font-editorial text-3xl text-accent">3.5 Hrs</p>
-                <p className="mt-1 text-sm text-ink-soft">
-                  less on front-desk calls, weekly.
-                </p>
-              </div>
-              <div>
-                <p className="font-editorial text-3xl text-accent">60%+</p>
-                <p className="mt-1 text-sm text-ink-soft">
-                  less missed calls, during pilot.
-                </p>
+          {/* Stats + testimonial together in one bordered card */}
+          <div className="mt-10 rounded-2xl border border-line p-6">
+            <div className="rounded-xl bg-accent-soft p-6">
+              <div className="flex gap-10">
+                <div>
+                  <p className="font-editorial text-3xl text-accent">3.5 Hrs</p>
+                  <p className="mt-1 text-sm text-ink-soft">
+                    less on front-desk calls, weekly.
+                  </p>
+                </div>
+                <div>
+                  <p className="font-editorial text-3xl text-accent">60%+</p>
+                  <p className="mt-1 text-sm text-ink-soft">
+                    less missed calls, during pilot.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-6 border-t border-line pt-6">
-            <p className="text-[15px] leading-relaxed text-ink">
-              "OperinLabs picked up every calls we would've otherwise
-              missed, I personally, loved the way it takes charge and
-              handle calls."
-            </p>
-            <p className="mt-3 text-sm text-ink-soft">
-              Head of Operations, pilot hospital in Assam
-            </p>
+            <div className="mt-6 px-2">
+              <p className="text-[15px] leading-relaxed text-ink">
+                "OperinLabs picked up every calls we would've otherwise
+                missed, I personally, loved the way it takes charge and
+                handle calls."
+              </p>
+              <p className="mt-3 text-sm text-ink-soft">
+                Head of Operations, pilot hospital in Assam
+              </p>
+            </div>
           </div>
 
           <div className="mt-12 border-t border-line pt-8">
@@ -144,19 +146,19 @@ export default function BookDemo() {
       {/* Right half: white, form boxed like the Sully reference */}
       <div className="flex min-h-screen items-center border-t border-line bg-white px-6 py-16 sm:px-14 lg:border-l lg:border-t-0">
         <div className="mx-auto w-full max-w-md">
+          <h2 className="font-editorial font-medium text-ink text-[28px] sm:text-[32px] leading-[1.15]">
+            Tell us how we can help
+          </h2>
+          <p className="text-ink-soft text-sm mt-2 mb-8">
+            We'll be in touch within one business day.
+          </p>
+
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="rounded-2xl border border-line bg-white p-8 shadow-lg shadow-black/5"
           >
-            <h2 className="font-editorial font-medium text-ink text-[28px] sm:text-[32px] leading-[1.15]">
-              Tell us how we can help
-            </h2>
-            <p className="text-ink-soft text-sm mt-2 mb-8">
-              We'll be in touch within one business day.
-            </p>
-
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <div>
                 <label
@@ -246,17 +248,15 @@ export default function BookDemo() {
                 </p>
               )}
 
-              <div className="flex justify-end">
-                <motion.button
-                  whileHover={{ scale: 0.98 }}
-                  whileTap={{ scale: 0.96 }}
-                  type="submit"
-                  disabled={status === "submitting"}
-                  className="rounded-xl bg-ink px-7 py-3.5 text-white text-sm font-medium transition-colors duration-200 hover:bg-accent disabled:opacity-60"
-                >
-                  {status === "submitting" ? "Submitting..." : "Submit"}
-                </motion.button>
-              </div>
+              <motion.button
+                whileHover={{ scale: 0.98 }}
+                whileTap={{ scale: 0.96 }}
+                type="submit"
+                disabled={status === "submitting"}
+                className="w-full rounded-xl bg-ink px-7 py-3.5 text-center text-white text-sm font-medium transition-colors duration-200 hover:bg-accent disabled:opacity-60"
+              >
+                {status === "submitting" ? "Submitting..." : "Submit"}
+              </motion.button>
             </form>
           </motion.div>
         </div>
