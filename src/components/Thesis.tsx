@@ -25,7 +25,7 @@ export default function Thesis() {
             <div className="relative mt-4 max-h-[144px] max-w-[46ch] overflow-hidden">
               <p className="text-base leading-relaxed text-ink-soft">
                 We believe the next generation of healthcare software won't
-                just help teams do their work, it will do the work with
+                just help teams do their work — it will do the work with
                 them. AI should be able to understand what needs to be
                 done, take action, and complete everyday healthcare
                 operations. We believe healthcare needs more than software
@@ -52,6 +52,7 @@ export default function Thesis() {
                   <button
                     key={t.listLabel}
                     onClick={() => setActive(i)}
+                    onMouseEnter={() => setActive(i)}
                     className={
                       active === i
                         ? "flex items-center gap-3 rounded-xl bg-accent-soft px-4 py-3 text-left text-sm font-medium text-ink transition-colors"
@@ -72,7 +73,7 @@ export default function Thesis() {
           {/* Right: single tilted card, purely visual — dissolves into the section at the bottom */}
           <div className="relative -mb-10 h-[460px] self-end">
             <div
-              className="absolute inset-0 overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
+              className="absolute inset-0 rotate-[9deg] overflow-hidden rounded-3xl border border-line bg-bg/60 p-8 sm:p-10"
               style={{
                 maskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 92%)",
