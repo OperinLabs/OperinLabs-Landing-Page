@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { BsArrowRight } from "react-icons/bs";
 import VoiceOrb from "./VoiceOrb";
 import TrustIndicators from "./TrustIndicators";
 
@@ -7,9 +7,10 @@ interface HeroProps {
   onBookDemo: () => void;
 }
 
-const headline = ["Every", "call", "answered.", "In", "their", "language."];
+const headlineLine1 = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous"];
+const headlineLine2 = ["healthcare", "operations"];
 
-const tabs = ["Answering", "Booking", "Reminders"];
+const tabs = ["Answering", "Booking", "Rescheduling", "Reminders", "Follow-ups", "Refill"];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -35,6 +36,8 @@ const container = {
 };
 
 export default function Hero({ onBookDemo }: HeroProps) {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
     <section
       id="top"
@@ -44,62 +47,72 @@ export default function Hero({ onBookDemo }: HeroProps) {
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-3xl flex-col items-center text-center"
+        className="mx-auto flex max-w-[90rem] flex-col items-start text-left"
       >
         <motion.h1
           variants={container}
-          className="font-editorial font-medium leading-[1.05] tracking-[-0.02em] text-mono-ink text-[40px] sm:text-[52px] md:text-[64px]"
+          className="w-full font-editorial font-medium leading-[1.05] tracking-[-0.01em] text-mono-ink text-[36px] sm:text-[46px] md:text-[56px]"
         >
-          {headline.map((w, i) => (
-            <motion.span key={i} variants={word} className="inline-block mr-[0.28em]">
-              {w}
-            </motion.span>
-          ))}
+          <span className="flex w-full justify-between">
+            {headlineLine1.map((w, i) => (
+              <motion.span key={i} variants={word} className="inline-block">
+                {w}
+              </motion.span>
+            ))}
+          </span>
+          <span className="mt-1 flex w-full justify-center gap-[0.3em]">
+            {headlineLine2.map((w, i) => (
+              <motion.span key={i} variants={word} className="inline-block">
+                {w}
+              </motion.span>
+            ))}
+          </span>
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="mt-5 max-w-[46ch] text-lg leading-relaxed text-mono-soft"
+          className="mt-5 w-full text-lg leading-relaxed text-mono-soft"
+          style={{ textAlign: "justify", textAlignLast: "justify" }}
         >
-          OperinLabs picks up every clinic and hospital call in Assamese,
-          Bengali, and Hindi — booking appointments, sending reminders, and
-          recovering missed patients.
+          OperinLabs gives healthcare organisations an AI workforce that
+          works around the clock, answering calls, booking appointments,
+          sending reminders, following up, and managing refills, all in
+          Assamese, Bengali, Hindi, and English, turning conversations into
+          decisions, actions, and completed workflows, autonomously.
         </motion.p>
+      </motion.div>
 
-        <motion.div variants={item} className="mt-8 flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onBookDemo}
-            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
-          >
-            Book a Demo
-            <BsArrowRight className="text-xs" aria-hidden="true" />
-          </motion.button>
-          <a
-            href="#pricing"
-            className="rounded-full border border-mono-line px-6 py-3 text-sm font-medium text-mono-ink transition-colors hover:bg-white"
-          >
-            See pricing
-          </a>
-        </motion.div>
-
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="mx-auto flex max-w-3xl flex-col items-center text-center"
+      >
         {/* Category tabs */}
         <motion.div
           variants={item}
+          onMouseLeave={() => setActiveTab(0)}
           className="mt-14 inline-flex items-center gap-1 rounded-full border border-mono-line bg-white p-1"
         >
           {tabs.map((tab, i) => (
-            <span
+            <button
               key={tab}
+              onMouseEnter={() => setActiveTab(i)}
               className={
-                i === 0
-                  ? "rounded-full bg-mono-ink px-4 py-1.5 text-xs font-medium text-white"
-                  : "rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
+                activeTab === i
+                  ? "relative rounded-full px-4 py-1.5 text-xs font-medium text-white"
+                  : "relative rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
               }
             >
-              {tab}
-            </span>
+              {activeTab === i && (
+                <motion.span
+                  layoutId="tab-marker"
+                  className="absolute inset-0 rounded-full bg-mono-ink"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+              <span className="relative">{tab}</span>
+            </button>
           ))}
         </motion.div>
 
