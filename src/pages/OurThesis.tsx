@@ -113,6 +113,7 @@ export default function OurThesis({ onBookDemo }: OurThesisProps) {
                 <button
                   key={t.listLabel}
                   onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
                   className={
                     active === i
                       ? "flex items-center gap-3 rounded-xl bg-accent-soft px-4 py-3 text-left text-sm font-medium text-ink transition-colors"
