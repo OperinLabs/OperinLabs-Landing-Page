@@ -87,21 +87,21 @@ export default function BookDemo() {
               <div>
                 <p className="font-editorial text-3xl text-accent">3.5 Hrs</p>
                 <p className="mt-1 text-sm text-ink-soft">
-                  fewer hours on front-desk calls, weekly
+                  less on front-desk calls, weekly.
                 </p>
               </div>
               <div>
-                <p className="font-editorial text-3xl text-accent">40%</p>
+                <p className="font-editorial text-3xl text-accent">60%+</p>
                 <p className="mt-1 text-sm text-ink-soft">
-                  of missed calls recovered during pilot
+                  less missed calls, during pilot.
                 </p>
               </div>
             </div>
 
             <div className="mt-8 border-t border-line pt-6">
               <p className="text-[15px] leading-relaxed text-ink">
-                "OperinLabs picked up calls we would've otherwise missed
-                after hours, patients stopped falling through the cracks."
+                "OperinLabs picked up every calls we would've otherwise missed,
+                I personally, loved the way it takes charge and handle calls."
               </p>
               <p className="mt-3 text-sm text-ink-soft">
                 Head of Operations, pilot hospital in Assam
@@ -176,7 +176,7 @@ export default function BookDemo() {
                     htmlFor="email"
                     className="block text-xs font-medium text-ink-soft mb-1.5"
                   >
-                    Business email
+                    Email
                   </label>
                   <input
                     id="email"
@@ -218,7 +218,7 @@ export default function BookDemo() {
                     htmlFor="organization"
                     className="block text-xs font-medium text-ink-soft mb-1.5"
                   >
-                    Clinic / hospital name{" "}
+                    Clinic / Hospital name{" "}
                     <span className="text-ink-soft/60">(optional)</span>
                   </label>
                   <input
