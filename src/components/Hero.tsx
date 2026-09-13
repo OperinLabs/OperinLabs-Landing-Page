@@ -53,14 +53,14 @@ export default function Hero({ onBookDemo }: HeroProps) {
           variants={container}
           className="w-full font-editorial font-medium leading-[1.05] tracking-[-0.01em] text-mono-ink text-[36px] sm:text-[46px] md:text-[56px]"
         >
-          <span className="flex w-full justify-between">
+          <span className="flex flex-wrap gap-x-2 gap-y-1 lg:flex-nowrap lg:justify-between">
             {headlineLine1.map((w, i) => (
               <motion.span key={i} variants={word} className="inline-block">
                 {w}
               </motion.span>
             ))}
           </span>
-          <span className="mt-1 flex w-full justify-center gap-[0.3em]">
+          <span className="mt-1 flex flex-wrap justify-center gap-[0.3em]">
             {headlineLine2.map((w, i) => (
               <motion.span key={i} variants={word} className="inline-block">
                 {w}
@@ -71,8 +71,8 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.p
           variants={item}
-          className="mt-5 w-full text-lg leading-relaxed text-mono-soft"
-          style={{ textAlign: "justify", textAlignLast: "justify" }}
+          className="mt-5 w-full text-lg leading-relaxed text-mono-soft lg:text-justify"
+          style={{ textAlignLast: "justify" }}
         >
           OperinLabs gives healthcare organisations an AI workforce that
           works around the clock, answering calls, booking appointments,
