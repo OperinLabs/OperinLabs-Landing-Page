@@ -34,10 +34,10 @@ export default function Product() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="w-full"
         >
-          <h2 className="whitespace-nowrap font-jakarta font-semibold text-ink text-[22px] sm:text-[30px] lg:text-[36px] leading-[1.1] tracking-[-0.01em]">
+          <h2 className="lg:whitespace-nowrap font-jakarta font-semibold text-ink text-[26px] sm:text-[30px] lg:text-[36px] leading-[1.15] lg:leading-[1.1] tracking-[-0.01em]">
             From Interaction to Autonomous Execution. Built for Healthcare.
           </h2>
-          <p className="mt-4 whitespace-nowrap text-base leading-relaxed text-ink-soft">
+          <p className="mt-4 lg:whitespace-nowrap text-base leading-relaxed text-ink-soft">
             OperinLabs is the autonomous execution layer that turns every
             interaction into action.
           </p>
