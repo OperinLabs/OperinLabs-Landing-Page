@@ -8,7 +8,7 @@ interface PricingProps {
 const plans = [
   {
     name: "Essential",
-    price: "₹999",
+    price: "₹2999",
     unit: "/ Month",
     features: [
       "Call answering, 24×7",
@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: "Growth",
-    price: "₹2999",
+    price: "₹6999",
     unit: "/ Month",
     features: [
       "Everything in Essential",
