@@ -74,11 +74,12 @@ export default function Hero({ onBookDemo }: HeroProps) {
           className="mt-5 w-full text-lg leading-relaxed text-mono-soft lg:text-justify"
           style={{ textAlignLast: "justify" }}
         >
-          OperinLabs gives healthcare organisations an AI workforce that
+          OperinLabs gives healthcare organisations an AI workforce for
+          autonomous healthcare operations, starting with an agent that
           works around the clock, answering calls, booking appointments,
-          sending reminders, following up, and managing refills, all in
-          Assamese, Bengali, Hindi, and English, turning conversations into
-          decisions, actions, and completed workflows, autonomously.
+          sending reminders, and following up in Assamese, Bengali, Hindi,
+          and English, turning conversations into decisions, actions, and
+          completed workflows.
         </motion.p>
       </motion.div>
 
