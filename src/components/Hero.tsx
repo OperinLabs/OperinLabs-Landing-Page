@@ -10,6 +10,19 @@ interface HeroProps {
 const headlineLine1 = ["Superhuman", "team", "of", "AI", "workforce", "for", "autonomous"];
 const headlineLine2 = ["healthcare", "operations"];
 
+const subheadLine1 = [
+  "OperinLabs", "gives", "healthcare", "organisations", "an", "AI",
+  "workforce", "for", "autonomous", "healthcare", "operations,",
+  "starting", "with", "an", "agent", "that", "works", "around", "the",
+  "clock,", "answering", "calls,",
+];
+const subheadLine2 = [
+  "booking", "appointments,", "sending", "reminders,", "and",
+  "following", "up", "in", "Assamese,", "Bengali,", "Hindi,", "and",
+  "English,", "turning", "conversations", "into", "decisions,",
+  "actions,", "and", "completed", "workflows.",
+];
+
 const tabs = ["Answering", "Booking", "Rescheduling", "Reminders", "Follow-ups", "Refill"];
 
 const item = {
@@ -73,12 +86,20 @@ export default function Hero({ onBookDemo }: HeroProps) {
           variants={item}
           className="mt-5 w-full text-base leading-relaxed text-mono-soft"
         >
-          OperinLabs gives healthcare organisations an AI workforce for
-          autonomous healthcare operations, starting with an agent that
-          works around the clock, answering calls, booking appointments,
-          sending reminders, and following up in Assamese, Bengali, Hindi,
-          and English, turning conversations into decisions, actions, and
-          completed workflows.
+          <span className="flex w-full justify-between">
+            {subheadLine1.map((w, i) => (
+              <span key={i} className="inline-block">
+                {w}
+              </span>
+            ))}
+          </span>
+          <span className="flex w-full justify-between">
+            {subheadLine2.map((w, i) => (
+              <span key={i} className="inline-block">
+                {w}
+              </span>
+            ))}
+          </span>
         </motion.p>
       </motion.div>
 
