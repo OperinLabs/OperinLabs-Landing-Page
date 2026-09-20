@@ -71,7 +71,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.p
           variants={item}
-          className="mt-5 w-full text-lg leading-relaxed text-mono-soft lg:text-justify"
+          className="mt-5 w-full text-base leading-relaxed tracking-tight text-mono-soft lg:text-justify"
           style={{ textAlignLast: "justify" }}
         >
           OperinLabs gives healthcare organisations an AI workforce for
