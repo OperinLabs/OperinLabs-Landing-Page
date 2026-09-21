@@ -9,6 +9,7 @@ const productLinks = [
   { label: "AI Receptionist", href: "/#product" },
   { label: "AI Pharmacist", href: "/#product" },
   { label: "AI Diagnostic Consultant", href: "/#product" },
+  { label: "AI Scribe", href: "/#product" },
 ];
 
 const companyLinks = [
