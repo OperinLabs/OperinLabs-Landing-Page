@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { BsCheck2, BsGlobe2, BsClock, BsRobot, BsBuildings } from "react-icons/bs";
+import { BsCheck2 } from "react-icons/bs";
+import TrustIndicators from "../components/TrustIndicators";
 
 interface FormState {
   name: string;
@@ -15,13 +16,6 @@ const initialState: FormState = {
   phone: "",
   organization: "",
 };
-
-const badges = [
-  { icon: BsClock, label: "24/7 Availability" },
-  { icon: BsGlobe2, label: "Assamese, Bengali, Hindi, English" },
-  { icon: BsRobot, label: "AI-Powered Call Answering" },
-  { icon: BsBuildings, label: "Piloting in 5+ Hospitals" },
-];
 
 // ---------------------------------------------------------------------------
 // SUBMISSION ENDPOINT — this posts nowhere yet. Point FORM_ENDPOINT at
@@ -100,76 +94,58 @@ export default function BookDemo() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg lg:flex-row lg:p-6">
-      {/* Left: floating gradient panel — inset with rounded corners, not edge-to-edge */}
-      <div
-        className="relative flex flex-col justify-between overflow-hidden px-8 py-28 sm:px-14 lg:w-[55%] lg:rounded-[32px] lg:py-14"
-        style={{
-          background:
-            "linear-gradient(135deg, #0A1A5E 0%, #0057FF 55%, #6FA0FF 100%)",
-        }}
-      >
-        {/* Frosted stat card */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="w-fit max-w-sm rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md"
-        >
-          <div className="flex gap-8">
-            <div>
-              <p className="font-editorial text-2xl text-white">3.5 Hrs</p>
-              <p className="mt-1 text-xs text-white/70">
-                less on front-desk calls, weekly.
-              </p>
-            </div>
-            <div>
-              <p className="font-editorial text-2xl text-white">60%+</p>
-              <p className="mt-1 text-xs text-white/70">
-                less missed calls, during pilot.
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 border-t border-white/20 pt-4">
-            <p className="text-sm leading-relaxed text-white/90">
-              "OperinLabs picked up every calls we would've otherwise
-              missed, I personally, loved the way it takes charge and
-              handle calls."
-            </p>
-            <p className="mt-2 text-xs text-white/60">
-              Head of Operations, pilot hospital in Assam
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Big tagline */}
-        <div className="mt-14 max-w-lg">
-          <h1 className="font-editorial font-medium text-white text-[28px] leading-[1.2] sm:text-[34px]">
+    <div className="grid min-h-screen lg:grid-cols-2">
+      {/* Left half: off-white, content vertically centered */}
+      <div className="flex min-h-screen items-center bg-bg px-6 py-16 sm:px-14">
+        <div className="mx-auto max-w-xl">
+          <h1 className="font-editorial font-medium text-ink text-[32px] sm:text-[40px] leading-[1.1] tracking-[-0.01em]">
             See OperinLabs in Action
           </h1>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/75">
+          <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
             Learn how OperinLabs saves your front desk hours every week
             while making sure no patient call goes unanswered.
           </p>
-        </div>
 
-        {/* Bottom badge row */}
-        <div className="mt-14 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/20 pt-6">
-          {badges.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex items-center gap-2 text-xs font-medium text-white/80"
-            >
-              <Icon aria-hidden="true" />
-              <span>{label}</span>
+          {/* Stats + testimonial together in one bordered card */}
+          <div className="mt-10 rounded-2xl border border-line p-6">
+            <div className="rounded-xl bg-accent-soft p-6">
+              <div className="flex gap-10">
+                <div>
+                  <p className="font-editorial text-3xl text-accent">3.5 Hrs</p>
+                  <p className="mt-1 text-sm text-ink-soft">
+                    less on front-desk calls, weekly.
+                  </p>
+                </div>
+                <div>
+                  <p className="font-editorial text-3xl text-accent">60%+</p>
+                  <p className="mt-1 text-sm text-ink-soft">
+                    less missed calls, during pilot.
+                  </p>
+                </div>
+              </div>
             </div>
-          ))}
+
+            <div className="mt-6 px-2">
+              <p className="text-[15px] leading-relaxed text-ink">
+                "OperinLabs picked up every calls we would've otherwise
+                missed, I personally, loved the way it takes charge and
+                handle calls."
+              </p>
+              <p className="mt-3 text-sm text-ink-soft">
+                Head of Operations, pilot hospital in Assam
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 border-t border-line pt-8">
+            <TrustIndicators />
+          </div>
         </div>
       </div>
 
-      {/* Right: plain background, centered narrow form column */}
-      <div className="flex flex-1 items-center justify-center px-6 py-16 sm:px-14">
-        <div className="w-full max-w-md">
+      {/* Right half: white, form boxed like the Sully reference */}
+      <div className="flex min-h-screen items-center border-t border-line bg-white px-6 py-16 sm:px-14 lg:border-l lg:border-t-0">
+        <div className="mx-auto w-full max-w-md">
           <h2 className="font-editorial font-medium text-ink text-[28px] sm:text-[32px] leading-[1.15]">
             Tell us how we can help
           </h2>
@@ -181,6 +157,7 @@ export default function BookDemo() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
+            className="rounded-2xl border border-line bg-white p-8 shadow-lg shadow-black/5"
           >
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               <div>
