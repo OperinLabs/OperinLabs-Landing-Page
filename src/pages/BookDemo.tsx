@@ -117,7 +117,7 @@ export default function BookDemo() {
                   </p>
                 </div>
                 <div>
-                  <p className="font-editorial text-3xl text-accent">60%+</p>
+                  <p className="font-editorial text-3xl text-accent">90%+</p>
                   <p className="mt-1 text-sm text-ink-soft">
                     less missed calls, during pilot.
                   </p>
