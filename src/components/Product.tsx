@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BsArrowRight, BsSoundwave, BsCalendarCheck, BsArrowRepeat } from "react-icons/bs";
+import { BsArrowRight, BsSoundwave, BsCalendarCheck, BsArrowRepeat, BsMicFill } from "react-icons/bs";
 
 const boxes = [
   {
@@ -20,6 +20,12 @@ const boxes = [
     icon: BsArrowRepeat,
     tags: ["Refills", "Patient Requests", "Operations", "Escalations"],
     body: "Gets repetitive work done and brings your team in when human help is needed.",
+  },
+  {
+    heading: "AI Scribe",
+    icon: BsMicFill,
+    tags: ["Dictation", "Clinical Notes", "Documentation"],
+    body: "Turns every visit into a finished note, cutting down on writing time so doctors get more time with patients instead of pen and paper.",
   },
 ];
 
@@ -43,7 +49,7 @@ export default function Product() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {boxes.map(({ heading, icon: Icon, tags, body }, i) => (
             <motion.div
               key={heading}
