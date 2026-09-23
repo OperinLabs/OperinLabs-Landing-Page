@@ -95,7 +95,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
               <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
                 <li>
                   <a
-                    href="mailto:rajgoswami.co@gmail.com"
+                    href="mailto:hello@operinlabs.com"
                     className="transition-colors hover:text-ink"
                   >
                     rajgoswami.co@gmail.com
