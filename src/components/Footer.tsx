@@ -98,7 +98,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
                     href="mailto:hello@operinlabs.com"
                     className="transition-colors hover:text-ink"
                   >
-                    rajgoswami.co@gmail.com
+                    hello@operinlabs.com
                   </a>
                 </li>
               </ul>
