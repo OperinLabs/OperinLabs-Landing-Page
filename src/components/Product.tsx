@@ -1,31 +1,37 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { BsArrowRight, BsSoundwave, BsCalendarCheck, BsArrowRepeat, BsMicFill } from "react-icons/bs";
+import { BsArrowRight, BsHeadset, BsArrowRepeat, BsMicFill, BsCheck2 } from "react-icons/bs";
 
 const boxes = [
   {
-    heading: "Understands",
-    icon: BsSoundwave,
-    tags: ["Calls", "WhatsApp", "Patient Queries"],
-    body: "Answers patients 24×7 in Assamese, Bengali, Hindi and English.",
+    heading: "AI Receptionist",
+    icon: BsHeadset,
+    summary: "The always-on front desk that never misses a call.",
+    duties: [
+      "Answers calls, WhatsApp messages, and patient queries 24×7 in Assamese, Bengali, Hindi & English",
+      "Books and reschedules appointments",
+      "Sends reminders and handles follow-ups",
+    ],
   },
   {
-    heading: "Acts",
-    icon: BsCalendarCheck,
-    tags: ["Bookings", "Rescheduling", "Reminders", "Follow-ups"],
-    body: "Takes action on patient requests instead of simply answering them.",
-  },
-  {
-    heading: "Follows",
+    heading: "AI Patient Care Coordinator",
     icon: BsArrowRepeat,
-    tags: ["Refills", "Patient Requests", "Operations", "Escalations"],
-    body: "Gets repetitive work done and brings your team in when human help is needed.",
+    summary: "Keeps patients cared for between visits, without extra staff.",
+    duties: [
+      "Handles medication refill requests",
+      "Manages day-to-day patient requests and operations",
+      "Escalates to your team only when human help is genuinely needed",
+    ],
   },
   {
     heading: "AI Scribe",
     icon: BsMicFill,
-    tags: ["Dictation", "Clinical Notes", "Documentation"],
-    body: "Turns every visit into a finished note, cutting down on writing time so doctors get more time with patients instead of pen and paper.",
+    summary: "Turns every visit into a finished note, automatically.",
+    duties: [
+      "Takes dictation during patient visits",
+      "Generates clinical notes",
+      "Handles documentation so doctors get time back from pen and paper",
+    ],
   },
 ];
 
@@ -41,16 +47,16 @@ export default function Product() {
           className="w-full"
         >
           <h2 className="lg:whitespace-nowrap font-jakarta font-semibold text-ink text-[26px] sm:text-[30px] lg:text-[36px] leading-[1.15] lg:leading-[1.1] tracking-[-0.01em]">
-            From Interaction to Autonomous Execution. Built for Healthcare.
+            Meet your AI team. Built for Healthcare.
           </h2>
           <p className="mt-4 lg:whitespace-nowrap text-base leading-relaxed text-ink-soft">
-            OperinLabs is the autonomous execution layer that turns every
-            interaction into action.
+            OperinLabs is a team of AI employees that runs your clinic's
+            front desk and patient care operations — around the clock.
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {boxes.map(({ heading, icon: Icon, tags, body }, i) => (
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          {boxes.map(({ heading, icon: Icon, summary, duties }, i) => (
             <motion.div
               key={heading}
               initial={{ opacity: 0, y: 16 }}
@@ -65,17 +71,27 @@ export default function Product() {
               <h3 className="mt-4 font-jakarta text-2xl font-semibold text-ink">
                 {heading}
               </h3>
-              <ul className="mt-3 flex flex-col gap-1 text-sm font-medium text-ink">
-                {tags.map((tag) => (
-                  <li key={tag} className="flex items-start gap-2">
-                    <span aria-hidden="true">•</span>
-                    <span>{tag}</span>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">
+                {summary}
+              </p>
+
+              <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-ink-soft/70">
+                Duties &amp; Responsibilities
+              </p>
+              <ul className="mt-3 flex flex-1 flex-col gap-2.5">
+                {duties.map((duty) => (
+                  <li key={duty} className="flex items-start gap-2.5">
+                    <BsCheck2
+                      className="mt-0.5 shrink-0 text-accent"
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm leading-relaxed text-ink">
+                      {duty}
+                    </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
-                {body}
-              </p>
+
               <Link
                 to="/pricing"
                 className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
