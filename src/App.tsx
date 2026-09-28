@@ -8,26 +8,22 @@ import AboutUs from "./pages/AboutUs";
 import PricingPage from "./pages/PricingPage";
 import BookDemo from "./pages/BookDemo";
 import OurThesis from "./pages/OurThesis";
+import TalkToReceptionist from "./pages/TalkToReceptionist";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const goToDemo = () => navigate("/book-a-demo");
-  const isBookDemoPage = location.pathname === "/book-a-demo";
+  const isMinimalHeaderPage =
+    location.pathname === "/book-a-demo" ||
+    location.pathname === "/talk-to-receptionist";
 
-  // Stop the browser's own scroll-restoration from fighting with our
-  // manual scroll-to-top below (a common conflict with React Router).
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
   }, []);
 
-  // Every route change should land at the top of the new page, unless
-  // the link was pointing at a specific in-page anchor (e.g. /#product),
-  // in which case we scroll to that section instead. useLayoutEffect
-  // runs synchronously before the browser paints, so there's no visible
-  // flash of the old scroll position first.
   useLayoutEffect(() => {
     if (location.hash) {
       const el = document.getElementById(location.hash.slice(1));
@@ -41,7 +37,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg font-inter">
-      {isBookDemoPage ? <MinimalHeader /> : <Navbar onBookDemo={goToDemo} />}
+      {isMinimalHeaderPage ? <MinimalHeader /> : <Navbar onBookDemo={goToDemo} />}
 
       <Routes>
         <Route path="/" element={<Home onBookDemo={goToDemo} />} />
@@ -49,9 +45,10 @@ function App() {
         <Route path="/pricing" element={<PricingPage onBookDemo={goToDemo} />} />
         <Route path="/our-thesis" element={<OurThesis />} />
         <Route path="/book-a-demo" element={<BookDemo />} />
+        <Route path="/talk-to-receptionist" element={<TalkToReceptionist />} />
       </Routes>
 
-      {!isBookDemoPage && <Footer onBookDemo={goToDemo} />}
+      {!isMinimalHeaderPage && <Footer onBookDemo={goToDemo} />}
     </div>
   );
 }
