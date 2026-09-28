@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import CallDemo from "./CallDemo";
 import TrustIndicators from "./TrustIndicators";
@@ -25,7 +26,7 @@ const subheadLine2 = [
 
 const steps = [
   { label: "Understands", detail: "Multilingual intent" },
-  { label: "Acts", detail: "Books, reminds, refills" },
+  { label: "Acts", detail: "Books & sends reminders" },
   { label: "Confirms", detail: "Logs & escalates when needed" },
 ];
 
@@ -53,6 +54,9 @@ const container = {
 };
 
 export default function Hero({ onBookDemo }: HeroProps) {
+  const navigate = useNavigate();
+  void onBookDemo;
+
   return (
     <section
       id="top"
@@ -122,7 +126,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
           variants={item}
           className="mt-2 font-editorial text-2xl text-mono-ink sm:text-3xl"
         >
-          One call. Fully handled.
+          Your AI Receptionist
         </motion.h2>
 
         {/* Process steps */}
@@ -158,10 +162,10 @@ export default function Hero({ onBookDemo }: HeroProps) {
           <motion.button
             whileHover={{ scale: 0.98 }}
             whileTap={{ scale: 0.95 }}
-            onClick={onBookDemo}
+            onClick={() => navigate("/talk-to-receptionist")}
             className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
           >
-            Talk to your AI team
+            Talk to your Receptionist
             <BsArrowRight className="text-xs" aria-hidden="true" />
           </motion.button>
         </motion.div>
