@@ -8,6 +8,7 @@ interface Turn {
 }
 
 interface Exchange {
+  patientName: string;
   patientLabel: string;
   turns: Turn[];
   bookingLine: string;
@@ -15,7 +16,8 @@ interface Exchange {
 
 const EXCHANGES: Exchange[] = [
   {
-    patientLabel: "Patient · Silchar",
+    patientName: "Raj",
+    patientLabel: "Raj · Silchar",
     turns: [
       { sender: "patient", text: "Aunty, doctor kolir slot ekhon ase ne?" },
       { sender: "bot", text: "Kun doctor lagibo aponar?" },
@@ -28,7 +30,8 @@ const EXCHANGES: Exchange[] = [
     bookingLine: "Tomorrow, 4:00 PM — Dr. Sharma",
   },
   {
-    patientLabel: "Patient · Guwahati",
+    patientName: "Priyanka",
+    patientLabel: "Priyanka · Guwahati",
     turns: [
       { sender: "patient", text: "Doctor-er shathe ki ajke dekha korte parbo?" },
       { sender: "bot", text: "Kon doctor-er kotha bolchen?" },
@@ -41,14 +44,15 @@ const EXCHANGES: Exchange[] = [
     bookingLine: "Today, 5:00 PM — Dr. Bora",
   },
   {
-    patientLabel: "Patient · Apollo Care",
+    patientName: "Anjala",
+    patientLabel: "Anjala · Guwahati",
     turns: [
       { sender: "patient", text: "Kal ka appointment hai, time confirm karna tha." },
       { sender: "bot", text: "Zaroor, aapka naam bata sakte hain?" },
-      { sender: "patient", text: "Allan Rodrigues" },
+      { sender: "patient", text: "Anjala Sharma" },
       {
         sender: "bot",
-        text: "Dhanyavaad Allan, aapka appointment kal subah 10 baje hai. Reminder bhi bhej dungi.",
+        text: "Dhanyavaad Anjala, aapka appointment kal subah 10 baje hai. Reminder bhi bhej dungi.",
       },
     ],
     bookingLine: "Tomorrow, 10:00 AM — confirmed",
@@ -133,6 +137,7 @@ export default function CallDemo() {
   return (
     <div className="relative w-full max-w-[540px] mx-auto">
       <div className="relative rounded-[28px] border border-mono-line bg-white p-8 shadow-xl shadow-black/5">
+        {/* Header */}
         <div className="flex items-center justify-between border-b border-mono-line pb-4">
           <AnimatePresence mode="wait">
             <motion.p
@@ -155,6 +160,7 @@ export default function CallDemo() {
           </span>
         </div>
 
+        {/* Conversation */}
         <div className="mt-5 flex min-h-[280px] flex-col gap-4">
           <AnimatePresence initial={false}>
             {priorTurns.slice(0, shownTurns).map((turn, i) => (
@@ -163,7 +169,7 @@ export default function CallDemo() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="flex items-start gap-3"
+                className="flex items-start gap-3 text-left"
               >
                 <div
                   className={
@@ -172,13 +178,13 @@ export default function CallDemo() {
                       : "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft"
                   }
                 >
-                  {turn.sender === "bot" ? "O" : exchange.patientLabel.charAt(0)}
+                  {turn.sender === "bot" ? "O" : exchange.patientName.charAt(0)}
                 </div>
-                <div>
+                <div className="min-w-0 flex-1 text-left">
                   <p className="text-xs font-medium text-mono-soft">
-                    {turn.sender === "bot" ? "OperinLabs" : "Patient"}
+                    {turn.sender === "bot" ? "OperinLabs" : exchange.patientName}
                   </p>
-                  <p className="mt-1 text-[15px] leading-relaxed text-mono-ink">
+                  <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
                     {turn.text}
                   </p>
                 </div>
@@ -186,14 +192,15 @@ export default function CallDemo() {
             ))}
           </AnimatePresence>
 
+          {/* Final reply: types out, then triggers the booking card */}
           {shownTurns >= priorTurns.length && (
-            <div className="relative flex items-start gap-3">
+            <div className="relative flex items-start gap-3 text-left">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg">
                 O
               </div>
-              <div className="min-h-[72px] flex-1">
+              <div className="min-w-0 flex-1 text-left">
                 <p className="text-xs font-medium text-mono-soft">OperinLabs</p>
-                <p className="mt-1 text-[15px] leading-relaxed text-mono-ink">
+                <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
                   {replyText}
                   {!isReplyDone && (
                     <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-mono-ink" />
@@ -212,6 +219,7 @@ export default function CallDemo() {
                 )}
               </div>
 
+              {/* Floating dark confirm card */}
               <AnimatePresence>
                 {(phase === "card" || phase === "tap") && (
                   <motion.div
