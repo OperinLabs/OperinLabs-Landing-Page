@@ -20,7 +20,7 @@ interface LeadData {
 // https://formspree.io (or reuse the one wired up for the Book a Demo page)
 // and paste its endpoint URL below to start receiving real conversations.
 // ---------------------------------------------------------------------------
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORM_ENDPOINT = "https://formspree.io/f/mgaerdao";
 
 type Step =
   | "name"
