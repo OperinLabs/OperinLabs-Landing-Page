@@ -2,9 +2,9 @@ import { BsGlobe2, BsClock, BsRobot, BsBuildings } from "react-icons/bs";
 
 const items = [
   { icon: BsGlobe2, label: "Assamese, Bengali, Hindi, English" },
-  { icon: BsClock, label: "24/7 Availability" },
-  { icon: BsRobot, label: "AI-Powered Call Answering" },
-  { icon: BsBuildings, label: "Piloting in 5+ Hospitals & OPD Clinics" },
+  { icon: BsClock, label: "24/7 availability" },
+  { icon: BsRobot, label: "AI Employees for Healthcare Operations" },
+  { icon: BsBuildings, label: "Piloting in 6+ hospitals" },
 ];
 
 export default function TrustIndicators() {
