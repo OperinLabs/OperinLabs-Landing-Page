@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import VoiceOrb from "./VoiceOrb";
+import { BsArrowRight } from "react-icons/bs";
+import CallDemo from "./CallDemo";
 import TrustIndicators from "./TrustIndicators";
 
 interface HeroProps {
@@ -23,7 +23,11 @@ const subheadLine2 = [
   "actions,", "and", "completed", "workflows.",
 ];
 
-const tabs = ["Answering", "Booking", "Rescheduling", "Reminders", "Follow-ups", "Refill"];
+const steps = [
+  { label: "Understands", detail: "Multilingual intent" },
+  { label: "Acts", detail: "Books, reminds, refills" },
+  { label: "Confirms", detail: "Logs & escalates when needed" },
+];
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -49,8 +53,6 @@ const container = {
 };
 
 export default function Hero({ onBookDemo }: HeroProps) {
-  const [activeTab, setActiveTab] = useState(0);
-
   return (
     <section
       id="top"
@@ -103,43 +105,65 @@ export default function Hero({ onBookDemo }: HeroProps) {
         </motion.p>
       </motion.div>
 
+      {/* How it works — live call demo */}
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
         className="mx-auto flex max-w-3xl flex-col items-center text-center"
       >
-        {/* Category tabs */}
+        <motion.p
+          variants={item}
+          className="mt-14 text-xs font-semibold uppercase tracking-wide text-mono-soft"
+        >
+          See it work
+        </motion.p>
+        <motion.h2
+          variants={item}
+          className="mt-2 font-editorial text-2xl text-mono-ink sm:text-3xl"
+        >
+          One call. Fully handled.
+        </motion.h2>
+
+        {/* Process steps */}
         <motion.div
           variants={item}
-          onMouseLeave={() => setActiveTab(0)}
-          className="mt-14 inline-flex items-center gap-1 rounded-full border border-mono-line bg-white p-1"
+          className="mt-8 flex items-start gap-3 sm:gap-6"
         >
-          {tabs.map((tab, i) => (
-            <button
-              key={tab}
-              onMouseEnter={() => setActiveTab(i)}
-              className={
-                activeTab === i
-                  ? "relative rounded-full px-4 py-1.5 text-xs font-medium text-white"
-                  : "relative rounded-full px-4 py-1.5 text-xs font-medium text-mono-soft"
-              }
-            >
-              {activeTab === i && (
-                <motion.span
-                  layoutId="tab-marker"
-                  className="absolute inset-0 rounded-full bg-mono-ink"
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                />
+          {steps.map((step, i) => (
+            <div key={step.label} className="flex items-start gap-3 sm:gap-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-mono-ink text-xs font-semibold text-mono-bg">
+                  {i + 1}
+                </div>
+                <p className="mt-2 text-xs font-medium text-mono-ink">
+                  {step.label}
+                </p>
+                <p className="hidden text-[11px] text-mono-soft sm:block">
+                  {step.detail}
+                </p>
+              </div>
+              {i < steps.length - 1 && (
+                <div className="mt-4 h-px w-8 bg-mono-line sm:w-14" />
               )}
-              <span className="relative">{tab}</span>
-            </button>
+            </div>
           ))}
         </motion.div>
 
-        {/* Voice orb centerpiece */}
-        <motion.div variants={item} className="mt-10">
-          <VoiceOrb onStart={onBookDemo} />
+        <motion.div variants={item} className="mt-10 w-full">
+          <CallDemo />
+        </motion.div>
+
+        <motion.div variants={item} className="mt-8">
+          <motion.button
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBookDemo}
+            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
+          >
+            Talk to your AI team
+            <BsArrowRight className="text-xs" aria-hidden="true" />
+          </motion.button>
         </motion.div>
       </motion.div>
 
