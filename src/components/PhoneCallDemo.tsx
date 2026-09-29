@@ -174,20 +174,41 @@ export default function PhoneCallDemo() {
 
   return (
     <div className="relative w-full max-w-[540px] mx-auto">
-      <div className="relative rounded-[28px] border border-mono-line bg-white p-8 shadow-xl shadow-black/5">
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-mono-line pb-4">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={scenario.patientName + scenario.type}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.3 }}
-              className="flex items-center gap-2.5 text-left"
-            >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft">
-                {scenario.patientName.charAt(0)}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={scenarioIndex}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="relative rounded-[28px] border border-mono-line bg-white p-8 shadow-xl shadow-black/5"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-mono-line pb-4">
+            <div className="flex items-center gap-2.5 text-left">
+              <div className="relative flex h-9 w-9 shrink-0 items-center justify-center">
+                {phase === "ringing" && (
+                  <>
+                    <motion.span
+                      className="absolute inset-0 rounded-full bg-accent/25"
+                      animate={{ scale: [1, 1.9], opacity: [0.5, 0] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: "easeOut" }}
+                    />
+                    <motion.span
+                      className="absolute inset-0 rounded-full bg-accent/25"
+                      animate={{ scale: [1, 1.9], opacity: [0.5, 0] }}
+                      transition={{
+                        duration: 1.4,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: 0.5,
+                      }}
+                    />
+                  </>
+                )}
+                <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft">
+                  {scenario.patientName.charAt(0)}
+                </div>
               </div>
               <div>
                 <p className="text-sm font-medium text-mono-ink">
@@ -202,101 +223,117 @@ export default function PhoneCallDemo() {
                   {scenario.phone}
                 </p>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
 
-          <div className="text-right">
-            <span className="inline-block rounded-full bg-mono-bg px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-mono-soft">
-              {scenario.type} call
-            </span>
-            <p className="mt-1.5 text-xs font-medium text-mono-soft">
-              {phase === "ringing" && "Ringing…"}
-              {phase === "connecting" && "Connecting…"}
-              {isLive && `${mm}:${ss}`}
-            </p>
-          </div>
-        </div>
-
-        {/* Waveform + captions */}
-        <div className="mt-5 flex min-h-[280px] flex-col items-center justify-center gap-7 text-center">
-          <div className="flex h-14 items-center gap-1">
-            {Array.from({ length: 11 }).map((_, i) => (
-              <motion.span
-                key={i}
-                className="w-[3px] rounded-full bg-mono-ink"
-                animate={
-                  isLive
-                    ? { height: [6, 10 + ((i * 7) % 34), 6] }
-                    : { height: 6 }
-                }
-                transition={{
-                  duration: 0.9 + (i % 4) * 0.15,
-                  repeat: isLive ? Infinity : 0,
-                  ease: "easeInOut",
-                  delay: i * 0.05,
-                }}
-              />
-            ))}
-          </div>
-
-          {(phase === "ringing" || phase === "connecting") && (
-            <p className="text-sm font-medium text-mono-soft">
-              {phase === "ringing" ? "Incoming call…" : "Connecting…"}
-            </p>
-          )}
-
-          {phase === "live" && activeCaption && (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={captionIndex}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
-                className="max-w-sm"
-              >
-                <p className="text-xs font-medium text-mono-soft">
-                  {activeCaption.speaker === "bot" ? "OperinLabs" : scenario.patientName}
-                </p>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-mono-ink">
-                  {activeCaption.text}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          )}
-
-          {phase === "outcome" && (
-            <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex flex-col items-center gap-2"
-            >
-              <span
-                className={
-                  scenario.outcomeTone === "success"
-                    ? "inline-flex items-center gap-1.5 rounded-full bg-mono-bg px-3 py-1.5 text-xs font-medium text-mono-ink"
-                    : "inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700"
-                }
-              >
-                {scenario.outcomeTone === "success" ? (
-                  <BsCheck2 className="text-[13px]" aria-hidden="true" />
-                ) : (
-                  <BsExclamationTriangleFill className="text-[13px]" aria-hidden="true" />
-                )}
-                {scenario.outcome}
+            <div className="text-right">
+              <span className="inline-block rounded-full bg-mono-bg px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-mono-soft">
+                {scenario.type} call
               </span>
+              <p className="mt-1.5 text-xs font-medium text-mono-soft">
+                {phase === "ringing" && "Ringing…"}
+                {phase === "connecting" && "Connecting…"}
+                {isLive && `${mm}:${ss}`}
+              </p>
+            </div>
+          </div>
 
-              {scenario.channelChip && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1.5 text-xs font-medium text-green-700">
-                  <BsWhatsapp className="text-[13px]" aria-hidden="true" />
-                  {scenario.channelChip}
-                </span>
+          {/* Waveform + captions */}
+          <div className="mt-5 flex min-h-[280px] flex-col items-center justify-center gap-7 text-center">
+            <div className="relative flex h-14 items-center gap-1">
+              {isLive && (
+                <motion.div
+                  className="absolute inset-x-[-16px] inset-y-[-10px] -z-10 rounded-full bg-accent-soft blur-xl"
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                />
               )}
-            </motion.div>
-          )}
-        </div>
-      </div>
+              {Array.from({ length: 11 }).map((_, i) => (
+                <motion.span
+                  key={i}
+                  className={isLive ? "w-[3px] rounded-full bg-accent" : "w-[3px] rounded-full bg-mono-line"}
+                  animate={
+                    isLive
+                      ? { height: [6, 10 + ((i * 7) % 34), 6] }
+                      : { height: 6 }
+                  }
+                  transition={{
+                    duration: 0.9 + (i % 4) * 0.15,
+                    repeat: isLive ? Infinity : 0,
+                    ease: "easeInOut",
+                    delay: i * 0.05,
+                  }}
+                />
+              ))}
+            </div>
+
+            {(phase === "ringing" || phase === "connecting") && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm font-medium text-mono-soft"
+              >
+                {phase === "ringing" ? "Incoming call…" : "Connecting…"}
+              </motion.p>
+            )}
+
+            {phase === "live" && activeCaption && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={captionIndex}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="max-w-sm"
+                >
+                  <p className="text-xs font-medium text-mono-soft">
+                    {activeCaption.speaker === "bot" ? "OperinLabs" : scenario.patientName}
+                  </p>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-mono-ink">
+                    {activeCaption.text}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            )}
+
+            {phase === "outcome" && (
+              <motion.div
+                initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 340, damping: 22 }}
+                className="flex flex-col items-center gap-2"
+              >
+                <span
+                  className={
+                    scenario.outcomeTone === "success"
+                      ? "inline-flex items-center gap-1.5 rounded-full bg-mono-bg px-3 py-1.5 text-xs font-medium text-mono-ink"
+                      : "inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700"
+                  }
+                >
+                  {scenario.outcomeTone === "success" ? (
+                    <BsCheck2 className="text-[13px]" aria-hidden="true" />
+                  ) : (
+                    <BsExclamationTriangleFill className="text-[13px]" aria-hidden="true" />
+                  )}
+                  {scenario.outcome}
+                </span>
+
+                {scenario.channelChip && (
+                  <motion.span
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15, duration: 0.25 }}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1.5 text-xs font-medium text-green-700"
+                  >
+                    <BsWhatsapp className="text-[13px]" aria-hidden="true" />
+                    {scenario.channelChip}
+                  </motion.span>
+                )}
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
