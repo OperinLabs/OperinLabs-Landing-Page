@@ -130,27 +130,29 @@ export default function Hero({ onBookDemo }: HeroProps) {
           Your AI Receptionist
         </motion.h2>
 
-        {/* Process steps */}
+        {/* Process steps — equal-width columns so the circles land exactly
+            equidistant no matter how long each step's label/detail is. */}
         <motion.div
           variants={item}
-          className="mt-8 flex items-start gap-3 sm:gap-6"
+          className="mt-8 grid w-full max-w-sm grid-cols-3"
         >
           {steps.map((step, i) => (
-            <div key={step.label} className="flex items-start gap-3 sm:gap-6">
-              <div className="flex flex-col items-center text-center">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-mono-ink text-xs font-semibold text-mono-bg">
-                  {i + 1}
-                </div>
-                <p className="mt-2 text-xs font-medium text-mono-ink">
-                  {step.label}
-                </p>
-                <p className="hidden text-[11px] text-mono-soft sm:block">
-                  {step.detail}
-                </p>
-              </div>
-              {i < steps.length - 1 && (
-                <div className="mt-4 h-px w-8 bg-mono-line sm:w-14" />
+            <div
+              key={step.label}
+              className="relative flex flex-col items-center px-1 text-center"
+            >
+              {i > 0 && (
+                <div className="absolute right-1/2 top-[18px] h-px w-full bg-mono-line" />
               )}
+              <div className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-mono-ink text-xs font-semibold text-mono-bg">
+                {i + 1}
+              </div>
+              <p className="mt-2 text-xs font-medium text-mono-ink">
+                {step.label}
+              </p>
+              <p className="mt-0.5 hidden text-[11px] text-mono-soft sm:block">
+                {step.detail}
+              </p>
             </div>
           ))}
         </motion.div>
