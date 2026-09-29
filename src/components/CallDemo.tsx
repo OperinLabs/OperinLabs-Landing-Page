@@ -59,7 +59,27 @@ const EXCHANGES: Exchange[] = [
   },
 ];
 
-type Phase = "reveal" | "typing" | "card" | "tap" | "confirmed";
+type Phase = "reveal" | "thinking" | "typing" | "card" | "tap" | "confirmed";
+
+function TypingDots() {
+  return (
+    <span className="inline-flex items-center gap-1 py-1.5">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="h-1.5 w-1.5 rounded-full bg-mono-soft"
+          animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{
+            duration: 0.9,
+            repeat: Infinity,
+            delay: i * 0.15,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </span>
+  );
+}
 
 export default function CallDemo() {
   const [exchangeIndex, setExchangeIndex] = useState(0);
@@ -87,7 +107,7 @@ export default function CallDemo() {
   useEffect(() => {
     if (phase !== "reveal") return;
     if (shownTurns >= priorTurns.length) {
-      const t = setTimeout(() => setPhase("typing"), 450);
+      const t = setTimeout(() => setPhase("thinking"), 450);
       timers.current.push(t);
       return () => clearTimeout(t);
     }
@@ -98,6 +118,13 @@ export default function CallDemo() {
     timers.current.push(t);
     return () => clearTimeout(t);
   }, [phase, shownTurns, priorTurns.length]);
+
+  useEffect(() => {
+    if (phase !== "thinking") return;
+    const t = setTimeout(() => setPhase("typing"), 900);
+    timers.current.push(t);
+    return () => clearTimeout(t);
+  }, [phase]);
 
   useEffect(() => {
     if (phase !== "typing") return;
@@ -133,122 +160,137 @@ export default function CallDemo() {
 
   const replyText = lastTurn.text.slice(0, revealedChars);
   const isReplyDone = revealedChars >= lastTurn.text.length;
+  const showBotRow = shownTurns >= priorTurns.length;
 
   return (
     <div className="relative w-full max-w-[540px] mx-auto">
-      <div className="relative rounded-[28px] border border-mono-line bg-white p-8 shadow-xl shadow-black/5">
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-mono-line pb-4">
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={exchange.patientLabel}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.3 }}
-              className="text-sm font-medium text-mono-soft"
-            >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={exchangeIndex}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -14 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="relative rounded-[28px] border border-mono-line bg-white p-8 shadow-xl shadow-black/5"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-mono-line pb-4">
+            <p className="text-sm font-medium text-mono-soft">
               {exchange.patientLabel}
-            </motion.p>
-          </AnimatePresence>
-          <span className="flex items-center gap-1.5 text-xs font-medium text-mono-soft">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mono-ink opacity-50" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-mono-ink" />
+            </p>
+            <span className="flex items-center gap-1.5 text-xs font-medium text-mono-soft">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mono-ink opacity-50" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-mono-ink" />
+              </span>
+              Live
             </span>
-            Live
-          </span>
-        </div>
+          </div>
 
-        {/* Conversation */}
-        <div className="mt-5 flex min-h-[280px] flex-col gap-4">
-          <AnimatePresence initial={false}>
-            {priorTurns.slice(0, shownTurns).map((turn, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="flex items-start gap-3 text-left"
-              >
-                <div
-                  className={
-                    turn.sender === "bot"
-                      ? "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg"
-                      : "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft"
-                  }
+          {/* Conversation */}
+          <div className="mt-5 flex min-h-[280px] flex-col gap-4">
+            <AnimatePresence initial={false}>
+              {priorTurns.slice(0, shownTurns).map((turn, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="flex items-start gap-3 text-left"
                 >
-                  {turn.sender === "bot" ? "O" : exchange.patientName.charAt(0)}
+                  <motion.div
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className={
+                      turn.sender === "bot"
+                        ? "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg"
+                        : "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-bg text-xs font-medium text-mono-soft"
+                    }
+                  >
+                    {turn.sender === "bot" ? "O" : exchange.patientName.charAt(0)}
+                  </motion.div>
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-xs font-medium text-mono-soft">
+                      {turn.sender === "bot" ? "OperinLabs" : exchange.patientName}
+                    </p>
+                    <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
+                      {turn.text}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+            {/* Final reply: a "thinking" beat, then it types out, then triggers the booking card */}
+            {showBotRow && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="relative flex items-start gap-3 text-left"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg">
+                  O
                 </div>
                 <div className="min-w-0 flex-1 text-left">
-                  <p className="text-xs font-medium text-mono-soft">
-                    {turn.sender === "bot" ? "OperinLabs" : exchange.patientName}
-                  </p>
-                  <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
-                    {turn.text}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                  <p className="text-xs font-medium text-mono-soft">OperinLabs</p>
 
-          {/* Final reply: types out, then triggers the booking card */}
-          {shownTurns >= priorTurns.length && (
-            <div className="relative flex items-start gap-3 text-left">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-mono-ink text-xs font-medium text-mono-bg">
-                O
-              </div>
-              <div className="min-w-0 flex-1 text-left">
-                <p className="text-xs font-medium text-mono-soft">OperinLabs</p>
-                <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
-                  {replyText}
-                  {!isReplyDone && (
-                    <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-mono-ink" />
+                  {phase === "thinking" ? (
+                    <TypingDots />
+                  ) : (
+                    <p className="mt-1 break-words text-[15px] leading-relaxed text-mono-ink">
+                      {replyText}
+                      {!isReplyDone && (
+                        <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-mono-ink" />
+                      )}
+                    </p>
                   )}
-                </p>
 
-                {phase === "confirmed" && (
-                  <motion.span
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-mono-bg px-3 py-1 text-xs font-medium text-mono-ink"
-                  >
-                    <BsCheck2 className="text-[13px]" aria-hidden="true" />
-                    Appointment booked
-                  </motion.span>
-                )}
-              </div>
-
-              {/* Floating dark confirm card */}
-              <AnimatePresence>
-                {(phase === "card" || phase === "tap") && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="absolute -bottom-4 right-0 w-[260px] rounded-2xl bg-mono-ink p-4 shadow-2xl shadow-black/30"
-                  >
-                    <p className="text-[10px] font-medium uppercase tracking-wider text-mono-bg/50">
-                      Booking preview
-                    </p>
-                    <p className="mt-1.5 text-sm font-medium text-mono-bg">
-                      {exchange.bookingLine}
-                    </p>
-                    <motion.button
-                      animate={phase === "tap" ? { scale: 0.94 } : { scale: 1 }}
-                      transition={{ duration: 0.15 }}
-                      className="mt-3 w-full rounded-lg bg-mono-bg py-2 text-xs font-medium text-mono-ink"
+                  {phase === "confirmed" && (
+                    <motion.span
+                      initial={{ opacity: 0, y: 4, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-mono-bg px-3 py-1 text-xs font-medium text-mono-ink"
                     >
-                      Confirm
-                    </motion.button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )}
-        </div>
-      </div>
+                      <BsCheck2 className="text-[13px]" aria-hidden="true" />
+                      Appointment booked
+                    </motion.span>
+                  )}
+                </div>
+
+                {/* Floating dark confirm card */}
+                <AnimatePresence>
+                  {(phase === "card" || phase === "tap") && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 14, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.94 }}
+                      transition={{ type: "spring", stiffness: 340, damping: 24 }}
+                      className="absolute -bottom-4 right-0 w-[260px] rounded-2xl bg-mono-ink p-4 shadow-2xl shadow-black/30"
+                    >
+                      <p className="text-[10px] font-medium uppercase tracking-wider text-mono-bg/50">
+                        Booking preview
+                      </p>
+                      <p className="mt-1.5 text-sm font-medium text-mono-bg">
+                        {exchange.bookingLine}
+                      </p>
+                      <motion.button
+                        animate={phase === "tap" ? { scale: 0.94 } : { scale: 1 }}
+                        transition={{ duration: 0.15 }}
+                        className="mt-3 w-full rounded-lg bg-mono-bg py-2 text-xs font-medium text-mono-ink"
+                      >
+                        Confirm
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
