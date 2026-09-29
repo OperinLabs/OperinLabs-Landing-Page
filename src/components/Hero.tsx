@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import CallDemo from "./CallDemo";
+import PhoneCallDemo from "./PhoneCallDemo";
 import TrustIndicators from "./TrustIndicators";
 
 interface HeroProps {
@@ -156,6 +157,17 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.div variants={item} className="mt-10 w-full">
           <CallDemo />
+        </motion.div>
+
+        <motion.p
+          variants={item}
+          className="mt-10 text-xs font-semibold uppercase tracking-wide text-mono-soft"
+        >
+          And it doesn't stop at chat — it's on the phone too
+        </motion.p>
+
+        <motion.div variants={item} className="mt-6 w-full">
+          <PhoneCallDemo />
         </motion.div>
 
         <motion.div variants={item} className="mt-8">
