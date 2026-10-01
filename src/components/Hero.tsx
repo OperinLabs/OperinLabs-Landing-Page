@@ -61,17 +61,40 @@ export default function Hero({ onBookDemo }: HeroProps) {
   return (
     <section
       id="top"
-      className="scroll-mt-24 bg-mono-bg px-6 pb-20 pt-24 sm:pt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-abyss px-6 pb-20 pt-32 sm:pt-36"
     >
+      {/* Ambient backdrop: grid texture + slow-drifting accent orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="bg-grid-light absolute inset-0 [mask-image:radial-gradient(ellipse_80%_55%_at_50%_0%,black,transparent)]" />
+        <motion.div
+          className="absolute -top-24 left-[6%] h-[420px] w-[420px] rounded-full bg-accent/25 blur-[120px]"
+          animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-32 right-[8%] h-[360px] w-[360px] rounded-full bg-accent/20 blur-[120px]"
+          animate={{ x: [0, -30, 0], y: [0, -25, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
       <motion.div
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-[90rem] flex-col items-start text-left"
+        className="relative mx-auto flex max-w-[90rem] flex-col items-start text-left"
       >
+        <motion.span
+          variants={item}
+          className="inline-flex items-center gap-2 rounded-full border border-abyss-line bg-white/5 px-3 py-1 text-xs font-medium text-accent"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          AI workforce for healthcare — live in Assam
+        </motion.span>
+
         <motion.h1
           variants={container}
-          className="w-full font-editorial font-medium leading-[1.05] tracking-[-0.01em] text-mono-ink text-[36px] sm:text-[46px] md:text-[56px]"
+          className="mt-6 w-full font-editorial font-medium leading-[1.05] tracking-[-0.01em] text-abyss-ink text-[36px] sm:text-[46px] md:text-[56px]"
         >
           <span className="flex flex-wrap gap-x-2 gap-y-1 lg:flex-nowrap lg:justify-between">
             {headlineLine1.map((w, i) => (
@@ -91,7 +114,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.p
           variants={item}
-          className="mt-5 w-full text-base leading-relaxed text-mono-soft"
+          className="mt-5 w-full text-base leading-relaxed text-abyss-soft"
         >
           <span className="flex w-full justify-between">
             {subheadLine1.map((w, i) => (
@@ -115,17 +138,17 @@ export default function Hero({ onBookDemo }: HeroProps) {
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto flex max-w-3xl flex-col items-center text-center"
+        className="relative mx-auto flex max-w-3xl flex-col items-center text-center"
       >
         <motion.p
           variants={item}
-          className="mt-14 text-xs font-semibold uppercase tracking-wide text-mono-soft"
+          className="mt-14 text-xs font-semibold uppercase tracking-wide text-accent"
         >
           See it work
         </motion.p>
         <motion.h2
           variants={item}
-          className="mt-2 font-editorial text-2xl text-mono-ink sm:text-3xl"
+          className="mt-2 font-editorial text-2xl text-abyss-ink sm:text-3xl"
         >
           Your AI Receptionist
         </motion.h2>
@@ -142,15 +165,15 @@ export default function Hero({ onBookDemo }: HeroProps) {
               className="relative flex flex-col items-center px-1 text-center"
             >
               {i > 0 && (
-                <div className="absolute right-1/2 top-[18px] h-px w-full bg-mono-line" />
+                <div className="absolute right-1/2 top-[18px] h-px w-full bg-abyss-line" />
               )}
-              <div className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-mono-ink text-xs font-semibold text-mono-bg">
+              <div className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-xs font-semibold text-white shadow-[0_0_24px_rgba(0,87,255,0.55)]">
                 {i + 1}
               </div>
-              <p className="mt-2 text-xs font-medium text-mono-ink">
+              <p className="mt-2 text-xs font-medium text-abyss-ink">
                 {step.label}
               </p>
-              <p className="mt-0.5 hidden text-[11px] text-mono-soft sm:block">
+              <p className="mt-0.5 hidden text-[11px] text-abyss-soft sm:block">
                 {step.detail}
               </p>
             </div>
@@ -163,7 +186,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
 
         <motion.p
           variants={item}
-          className="mt-10 text-xs font-semibold uppercase tracking-wide text-mono-soft"
+          className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent"
         >
           And it doesn't stop at chat — it's on the phone too
         </motion.p>
@@ -177,7 +200,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
             whileHover={{ scale: 0.98 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate("/talk-to-receptionist")}
-            className="inline-flex items-center gap-1.5 rounded-full bg-mono-ink px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-black"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white shadow-[0_0_30px_rgba(0,87,255,0.45)] transition-colors hover:bg-[#0048d9]"
           >
             Talk to your Receptionist
             <BsArrowRight className="text-xs" aria-hidden="true" />
@@ -189,10 +212,10 @@ export default function Hero({ onBookDemo }: HeroProps) {
         variants={item}
         initial="hidden"
         animate="show"
-        className="mx-auto mt-16 max-w-6xl border-t border-mono-line pt-8"
+        className="relative mx-auto mt-16 max-w-6xl border-t border-abyss-line pt-8"
       >
         <div className="flex justify-center">
-          <TrustIndicators />
+          <TrustIndicators variant="dark" />
         </div>
       </motion.div>
     </section>
