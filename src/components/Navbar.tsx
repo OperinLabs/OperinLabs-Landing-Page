@@ -28,7 +28,7 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -36,18 +36,21 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
 
   return (
     <>
+      {/* Full-width, top-anchored bar (not a floating pill) — a plain,
+          enterprise-SaaS nav pattern: solid surface, hairline border,
+          a touch more shadow once the page scrolls. */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-4 sm:top-6 left-0 right-0 z-50 px-6"
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className={
+          scrolled
+            ? "fixed top-0 left-0 right-0 z-50 border-b border-line bg-white/95 shadow-sm shadow-black/[0.04] backdrop-blur-md transition-all duration-300"
+            : "fixed top-0 left-0 right-0 z-50 border-b border-transparent bg-white transition-all duration-300"
+        }
       >
         <nav
-          className={
-            scrolled
-              ? "mx-auto flex max-w-[90rem] items-center justify-between gap-4 rounded-full border border-line bg-white/95 py-2 pl-4 pr-2 shadow-md shadow-black/[0.06] backdrop-blur-md transition-all duration-300"
-              : "mx-auto flex max-w-[90rem] items-center justify-between gap-4 rounded-full border border-line bg-white/75 py-2.5 pl-4 pr-2 shadow-sm shadow-black/[0.03] backdrop-blur-md transition-all duration-300"
-          }
+          className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-6"
           aria-label="Primary"
         >
           {/* Logo */}
@@ -56,35 +59,37 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           </Link>
 
           {/* Desktop links + actions, grouped together on the right */}
-          <div className="hidden md:flex md:items-center md:gap-1">
-            {navLinks.map((link) => {
-              const isActive = link.isRoute && location.pathname === link.href;
-              const className = isActive
-                ? "relative rounded-full px-4 py-1.5 text-sm font-medium text-ink"
-                : "relative rounded-full px-4 py-1.5 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink";
+          <div className="hidden md:flex md:items-center md:gap-7">
+            <div className="flex items-center gap-6">
+              {navLinks.map((link) => {
+                const isActive = link.isRoute && location.pathname === link.href;
+                const className = isActive
+                  ? "relative text-sm font-medium text-ink"
+                  : "relative text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink";
 
-              return link.isRoute ? (
-                <Link key={link.label} to={link.href} className={className}>
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-accent-soft"
-                      transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                    />
-                  )}
-                  <span className="relative">{link.label}</span>
-                </Link>
-              ) : (
-                <a key={link.label} href={link.href} className={className}>
-                  <span className="relative">{link.label}</span>
-                </a>
-              );
-            })}
+                return link.isRoute ? (
+                  <Link key={link.label} to={link.href} className={className}>
+                    {link.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active-underline"
+                        className="absolute -bottom-[21px] left-0 right-0 h-[2px] bg-accent"
+                        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                      />
+                    )}
+                  </Link>
+                ) : (
+                  <a key={link.label} href={link.href} className={className}>
+                    {link.label}
+                  </a>
+                );
+              })}
+            </div>
             <motion.button
               whileHover={{ scale: 0.98 }}
               whileTap={{ scale: 0.96 }}
               onClick={onBookDemo}
-              className="ml-1 rounded-full bg-ink px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-accent"
+              className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white shadow-[0_8px_20px_-8px_rgba(0,87,255,0.6)] transition-colors duration-200 hover:bg-[#0048d9]"
             >
               Book a Demo
             </motion.button>
