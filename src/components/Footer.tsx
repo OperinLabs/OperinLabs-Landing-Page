@@ -50,7 +50,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
               {productLinks.map((link) => (
                 <li key={link.label}>
                   {link.href.startsWith("/#") ? (
-                    
+                    <a
                       href={link.href}
                       className="text-sm text-abyss-soft transition-colors hover:text-abyss-ink"
                     >
@@ -75,7 +75,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   {link.href.startsWith("/#") ? (
-                    
+                    <a
                       href={link.href}
                       className="text-sm text-abyss-soft transition-colors hover:text-abyss-ink"
                     >
@@ -98,7 +98,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
             <p className="text-sm font-medium text-abyss-ink">Support</p>
             <ul className="mt-4 flex flex-col gap-3 text-sm text-abyss-soft">
               <li>
-                
+                <a
                   href="mailto:hello@operinlabs.com"
                   className="transition-colors hover:text-abyss-ink"
                 >
@@ -122,7 +122,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            
+            <a
               href="https://www.linkedin.com/company/operinlabs"
               target="_blank"
               rel="noopener noreferrer"
@@ -131,7 +131,7 @@ export default function Footer({ onBookDemo }: FooterProps) {
             >
               <BsLinkedin aria-hidden="true" />
             </a>
-            
+            <a
               href="#top"
               className="text-xs font-medium text-abyss-soft transition-colors hover:text-abyss-ink"
             >
