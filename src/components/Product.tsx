@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { BsArrowRight, BsHeadset, BsArrowRepeat, BsMicFill, BsCheck2 } from "react-icons/bs";
+import { BsHeadset, BsArrowRepeat, BsMicFill, BsCheck2, BsShieldCheck } from "react-icons/bs";
 
 const boxes = [
   {
@@ -13,6 +12,7 @@ const boxes = [
       "Books and reschedules appointments",
       "Sends reminders and handles follow-ups",
     ],
+    status: "live" as const,
   },
   {
     index: "02",
@@ -24,6 +24,7 @@ const boxes = [
       "Manages day-to-day patient requests and operations",
       "Escalates to your team only when human help is genuinely needed",
     ],
+    status: "soon" as const,
   },
   {
     index: "03",
@@ -35,6 +36,19 @@ const boxes = [
       "Generates clinical notes",
       "Handles documentation so doctors get time back from pen and paper",
     ],
+    status: "soon" as const,
+  },
+  {
+    index: "04",
+    heading: "AI Claims Associate",
+    icon: BsShieldCheck,
+    summary: "Chases every claim so your front desk doesn't have to.",
+    duties: [
+      "Checks insurance eligibility and coverage before the visit",
+      "Files and tracks claims with payers end-to-end",
+      "Flags denials and follows up until they're resolved",
+    ],
+    status: "soon" as const,
   },
 ];
 
@@ -61,8 +75,8 @@ export default function Product() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
-          {boxes.map(({ index, heading, icon: Icon, summary, duties }, i) => (
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {boxes.map(({ index, heading, icon: Icon, summary, duties, status }, i) => (
             <motion.div
               key={heading}
               initial={{ opacity: 0, y: 16 }}
@@ -106,13 +120,19 @@ export default function Product() {
                 ))}
               </ul>
 
-              <Link
-                to="/pricing"
-                className="relative mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-white px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft"
-              >
-                Know more
-                <BsArrowRight className="text-xs" aria-hidden="true" />
-              </Link>
+              {status === "live" ? (
+                <span className="relative mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-accent/20 bg-accent-soft px-4 py-2 text-sm font-medium text-accent">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                  </span>
+                  Live
+                </span>
+              ) : (
+                <span className="relative mt-6 inline-flex w-fit items-center gap-1.5 rounded-lg border border-line bg-bg px-4 py-2 text-sm font-medium text-ink-soft">
+                  Coming live soon
+                </span>
+              )}
             </motion.div>
           ))}
         </div>
