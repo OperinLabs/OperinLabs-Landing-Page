@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight, BsCheck2 } from "react-icons/bs";
 import CallDemo from "./CallDemo";
 import PhoneCallDemo from "./PhoneCallDemo";
 import TrustIndicators from "./TrustIndicators";
+
+const credBadges = [
+  "24/7 availability",
+  "Assamese, Bengali, Hindi & English",
+  "Piloting in 6+ hospitals",
+];
 
 interface HeroProps {
   onBookDemo: () => void;
@@ -61,7 +67,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
   return (
     <section
       id="top"
-      className="relative scroll-mt-24 overflow-hidden bg-abyss px-6 pb-20 pt-32 sm:pt-36"
+      className="relative scroll-mt-24 overflow-hidden bg-abyss px-6 pb-20 pt-28 sm:pt-32"
     >
       {/* Ambient backdrop: grid texture + slow-drifting accent orbs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -91,6 +97,24 @@ export default function Hero({ onBookDemo }: HeroProps) {
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           AI workforce for healthcare — live in Assam
         </motion.span>
+
+        {/* Credibility strip — small proof badges up top, the way an
+            enterprise health-tech product leads with trust signals
+            before the headline even lands. */}
+        <motion.div
+          variants={item}
+          className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2"
+        >
+          {credBadges.map((label) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-abyss-soft"
+            >
+              <BsCheck2 className="text-accent" aria-hidden="true" />
+              {label}
+            </span>
+          ))}
+        </motion.div>
 
         <motion.h1
           variants={container}
@@ -131,6 +155,18 @@ export default function Hero({ onBookDemo }: HeroProps) {
             ))}
           </span>
         </motion.p>
+
+        <motion.div variants={item} className="mt-7">
+          <motion.button
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate("/talk-to-receptionist")}
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white shadow-[0_0_30px_rgba(0,87,255,0.45)] transition-colors hover:bg-[#0048d9]"
+          >
+            Talk to your Receptionist
+            <BsArrowRight className="text-xs" aria-hidden="true" />
+          </motion.button>
+        </motion.div>
       </motion.div>
 
       {/* How it works — live call demo */}
