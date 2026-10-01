@@ -17,6 +17,13 @@ export default {
         "mono-ink": "#141414",
         "mono-soft": "#6B6E76",
         "mono-line": "rgba(20, 20, 20, 0.1)",
+        // "Infra" dark backdrop — used for the Hero band only. Kept
+        // separate from the mono-* tokens so the white demo cards (which
+        // rely on mono-* for their own internal contrast) are unaffected.
+        abyss: "#070A14",
+        "abyss-ink": "#F5F7FC",
+        "abyss-soft": "#9AA4CC",
+        "abyss-line": "rgba(245, 247, 252, 0.12)",
       },
       fontFamily: {
         editorial: ["'Fraunces'", "serif"],
