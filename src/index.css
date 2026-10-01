@@ -23,3 +23,34 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+::selection {
+  background-color: #0057ff;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(10, 26, 94, 0.18);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 26, 94, 0.3);
+}
+
+/* Faint engineering-grid texture, used behind the dark Hero band */
+.bg-grid-light {
+  background-image: linear-gradient(
+      to right,
+      rgba(245, 247, 252, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(245, 247, 252, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
